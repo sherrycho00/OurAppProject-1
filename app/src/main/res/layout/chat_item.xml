@@ -1,0 +1,341 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/chat"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="5dp"
+    android:layout_marginEnd="8dp"
+    android:layout_marginStart="8dp"
+    android:layout_marginTop="5dp"
+    android:paddingBottom="2dp"
+    android:paddingEnd="2dp"
+    android:paddingLeft="10dp"
+    android:paddingRight="10dp"
+    android:paddingTop="10dp"
+    app:contentPadding="5dp">
+
+    <com.makeramen.roundedimageview.RoundedImageView
+        android:id="@+id/chat_user"
+        android:layout_width="28dp"
+        android:layout_height="28dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:src="@drawable/user"
+        app:riv_border_color="#333333"
+        app:riv_border_width="1dp"
+        app:riv_oval="true" />
+
+    <TextView
+        android:id="@+id/chat_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="40dp"
+
+        android:text="Tom"
+        android:textSize="14sp" />
+
+    <TextView
+        android:id="@+id/chat_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/chat_label_dislike"
+        android:layout_alignParentEnd="true"
+        android:layout_gravity="right"
+        android:layout_marginRight="5dp"
+        android:text="12:00"
+        android:textColor="@android:color/darker_gray"
+        android:textSize="10sp" />
+
+    <TextView
+        android:id="@+id/chat_content"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="20dp"
+        android:layout_marginLeft="40dp"
+        android:layout_marginTop="20dp"
+        android:text="test test testtest"
+        android:textColor="@color/black"
+        android:textSize="16sp" />
+
+    <LinearLayout
+        android:id="@+id/chat_state_online"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="100dp">
+
+        <ImageView
+
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:src="@drawable/chat_online" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="2dp"
+            android:text="在线" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/chat_state_offline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="100dp">
+
+        <ImageView
+
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:src="@drawable/chat_offline" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="2dp"
+            android:text="离线" />
+    </LinearLayout>
+
+    <!--一个用来做固定位置-->
+    <ImageView
+        android:id="@+id/align"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="false"
+        android:layout_gravity="right"
+        android:layout_marginEnd="50dp"
+        android:layout_toStartOf="@+id/comment"
+        android:background="@drawable/chat_lab_dislike"
+        android:padding="2dp"
+        android:paddingBottom="5dp"
+        android:weightSum="1" />
+
+    <!--标签-->
+    <LinearLayout
+        android:id="@+id/chat_label_dislike"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="false"
+        android:layout_gravity="end"
+        android:layout_marginEnd="50dp"
+        android:layout_toStartOf="@+id/comment"
+        android:background="@drawable/chat_lab_dislike"
+        android:padding="1dp"
+        android:weightSum="1">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="1dp"
+            android:layout_marginLeft="9dp"
+            android:layout_marginRight="5dp"
+            android:layout_marginTop="1dp"
+            android:layout_weight="0.52"
+            android:allowUndo="false"
+            android:duplicateParentState="false"
+            android:gravity="end"
+            android:text="吐槽"
+            android:textAlignment="center"
+            android:textSize="8sp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/chat_label_commend"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="end"
+        android:layout_marginEnd="50dp"
+        android:layout_toStartOf="@+id/comment"
+        android:background="@drawable/chat_lab_commend"
+        android:padding="1dp"
+        android:weightSum="1">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="1dp"
+            android:layout_marginLeft="9dp"
+            android:layout_marginRight="5dp"
+            android:layout_marginTop="1dp"
+            android:layout_weight="0.52"
+            android:allowUndo="false"
+            android:duplicateParentState="false"
+            android:gravity="end"
+            android:text="推荐"
+            android:textAlignment="center"
+            android:textSize="8sp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/chat_label_date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="false"
+        android:layout_gravity="end"
+        android:layout_marginEnd="50dp"
+        android:layout_toStartOf="@+id/comment"
+        android:background="@drawable/chat_lab_date"
+        android:padding="1dp"
+        android:weightSum="1">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="1dp"
+            android:layout_marginLeft="9dp"
+            android:layout_marginRight="5dp"
+            android:layout_marginTop="1dp"
+            android:layout_weight="0.52"
+            android:allowUndo="false"
+            android:duplicateParentState="false"
+            android:gravity="end"
+            android:text="约饭"
+            android:textAlignment="center"
+            android:textSize="8sp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/chat_label_else"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="false"
+        android:layout_gravity="end"
+        android:layout_marginEnd="50dp"
+        android:layout_toStartOf="@+id/comment"
+        android:background="@drawable/chat_lab_else"
+        android:padding="1dp"
+        android:weightSum="1">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="1dp"
+            android:layout_marginLeft="9dp"
+            android:layout_marginRight="5dp"
+            android:layout_marginTop="1dp"
+            android:layout_weight="0.52"
+            android:allowUndo="false"
+            android:duplicateParentState="false"
+            android:gravity="end"
+            android:text="其他"
+            android:textAlignment="center"
+            android:textSize="8sp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/chat_label_find"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="false"
+        android:layout_gravity="end"
+        android:layout_marginEnd="50dp"
+        android:layout_toStartOf="@+id/comment"
+        android:background="@drawable/chat_lab_find"
+        android:padding="1dp"
+        android:weightSum="1">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="1dp"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:layout_marginTop="1dp"
+            android:layout_weight="0.52"
+            android:allowUndo="false"
+            android:duplicateParentState="false"
+            android:gravity="end"
+            android:text="失物招领"
+            android:textAlignment="center"
+            android:textSize="8sp" />
+    </LinearLayout>
+    <!--点赞-->
+
+    <LinearLayout
+        android:id="@+id/like"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/comment"
+        android:layout_alignEnd="@+id/align"
+        android:layout_gravity="bottom|end"
+        android:layout_marginEnd="55dp">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="5dp"
+            android:src="@drawable/chat_like" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:allowUndo="false"
+            android:duplicateParentState="false"
+            android:gravity="end"
+            android:text="赞"
+            android:textAlignment="center"
+            android:textSize="10sp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/no_like"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/comment"
+        android:layout_alignEnd="@+id/align"
+        android:layout_gravity="bottom|end"
+        android:layout_marginEnd="55dp">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="5dp"
+            android:src="@drawable/chat_no_like" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:allowUndo="false"
+            android:duplicateParentState="false"
+            android:gravity="end"
+            android:text="赞"
+            android:textAlignment="center"
+            android:textSize="10sp" />
+    </LinearLayout>
+
+    <!--评论-->
+    <LinearLayout
+        android:id="@+id/comment"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+
+        android:layout_alignParentEnd="true"
+        android:layout_below="@+id/chat_content"
+        android:layout_gravity="bottom|end"
+        android:layout_marginEnd="5dp">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="5dp"
+            android:src="@drawable/comment" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:allowUndo="false"
+            android:duplicateParentState="false"
+            android:gravity="end"
+            android:text="评论"
+            android:textAlignment="center"
+            android:textSize="10sp" />
+    </LinearLayout>
+
+</android.support.v7.widget.CardView>

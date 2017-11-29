@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:fresco="http://schemas.android.com/apk/res-auto"
+    tools:context="com.example.elsie.framelayout.LoginActivity">
+    <include layout="@layout/top"
+        android:id="@+id/include" />
+
+    <com.makeramen.roundedimageview.RoundedImageView
+        android:id="@+id/image_user"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_below="@+id/include"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="52dp"
+        android:src="@drawable/user"
+        app:riv_border_color="#6ea0f8"
+        app:riv_border_width="2dp"
+        app:riv_oval="true" />
+    <EditText
+        android:id="@+id/userpwd"
+        android:layout_width="250dp"
+        android:layout_height="60dp"
+        android:layout_below="@+id/username"
+        android:layout_centerHorizontal="true"
+        android:drawableLeft="@android:drawable/ic_lock_idle_lock"
+        android:ems="10"
+        android:hint="请输入密码"
+        android:inputType="textPassword"
+        android:textSize="18sp"
+        tools:layout_editor_absoluteX="31dp"
+        tools:layout_editor_absoluteY="169dp" />
+
+    <EditText
+        android:id="@+id/username"
+        android:layout_width="250dp"
+        android:layout_height="60dp"
+        android:layout_alignLeft="@+id/userpwd"
+        android:layout_alignStart="@+id/userpwd"
+        android:layout_below="@+id/image_user"
+        android:layout_marginTop="49dp"
+        android:drawableLeft="@android:drawable/ic_menu_myplaces"
+        android:ems="10"
+        android:hint="请输入您的用户名"
+        android:inputType="textPersonName"
+        tools:layout_editor_absoluteX="31dp"
+        tools:layout_editor_absoluteY="85dp" />
+
+    <Button
+        android:id="@+id/login"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/userpwd"
+        android:layout_below="@+id/userpwd"
+        android:layout_marginStart="27dp"
+        android:drawableLeft="@android:drawable/ic_menu_edit"
+        android:padding="8dp"
+        android:text="登录"/>
+
+
+        <Button
+            android:id="@+id/register"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:drawableLeft="@android:drawable/ic_menu_edit"
+            android:padding="8dp"
+            android:text="注册"
+
+            android:layout_marginEnd="18dp"
+            android:layout_below="@+id/userpwd"
+            android:layout_alignEnd="@+id/userpwd" />
+
+
+
+<!---->
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="bottom"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:id="@+id/linearLayout">
+
+        <ImageView
+            android:id="@+id/gif"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_alignParentBottom="true"
+            android:layout_marginRight="0dp"
+            android:layout_marginStart="16dp"
+            android:layout_toEndOf="@+id/image_user"
+            android:src="@drawable/hello" />
+
+        <ImageView
+            android:id="@+id/gif1"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_alignEnd="@+id/login"
+            android:layout_alignParentBottom="true"
+            android:layout_marginEnd="17dp"
+            android:layout_marginLeft="20dp"
+            android:src="@drawable/hello" />
+
+        <ImageView
+            android:id="@+id/gif2"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_alignParentBottom="true"
+            android:layout_toStartOf="@+id/gif1"
+            android:src="@drawable/hello" />
+    </LinearLayout>
+</RelativeLayout>
