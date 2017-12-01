@@ -60,6 +60,7 @@ public class LoginActivity extends FragmentActivity {
         //String   url = "http://img.mp.itc.cn/upload/20161106/ab60d2070c8a4b3c9c4c69e18d30a464_th.gif";
         String url="http://img1.2345.com/duoteimg/qqbiaoqing/160812512480/23.gif";
         //加载图片
+
         //Glide.with(this).load(url).placeholder(R.mipmap.place).error(R.mipmap.icon_photo_error).into(mIv);
         Glide.with(LoginActivity.this).load(url).into(iv);
         Glide.with(LoginActivity.this).load(url).into(iv1);
