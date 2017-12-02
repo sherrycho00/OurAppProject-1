@@ -1,6 +1,9 @@
-package com.example.elsie.framelayout;
+package com.example.elsie.framelayout.Rank;
 
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.widget.DrawerLayout;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -11,6 +14,8 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.Toast;
+
+import com.example.elsie.framelayout.R;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -69,12 +74,24 @@ public class RankFragment extends android.support.v4.app.Fragment{
                 switch (position) {
                     case 0:
                         Toast.makeText(getContext(),"1floor",Toast.LENGTH_LONG).show();
+                        Fragment dishFragment = new DishFragment();
+                        FragmentManager fm = getFragmentManager();
+                        FragmentTransaction transaction = fm.beginTransaction();
+                        transaction.add(R.id.dish_lycontent,dishFragment);
+                        transaction.commit();
+                        mFloor.setBackgroundResource(R.drawable.graychat);
+                        mDrawerLayout.closeDrawer(Gravity.LEFT);
+
                         break;
                     case 1:
-                        Toast.makeText(getContext(),"1floor",Toast.LENGTH_LONG).show();
+                        Toast.makeText(getContext(),"2floor",Toast.LENGTH_LONG).show();
+                        mFloor.setBackgroundResource(R.drawable.graychat);
+                        mDrawerLayout.closeDrawer(Gravity.LEFT);
                         break;
                     case 2:
-                        Toast.makeText(getContext(),"1floor",Toast.LENGTH_LONG).show();
+                        Toast.makeText(getContext(),"3floor",Toast.LENGTH_LONG).show();
+                        mFloor.setBackgroundResource(R.drawable.graychat);
+                        mDrawerLayout.closeDrawer(Gravity.LEFT);
                         break;
                     default:
                         break;
