@@ -1,9 +1,12 @@
 package com.example.elsie.framelayout;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
+import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -13,7 +16,16 @@ import android.widget.Toast;
 import com.bumptech.glide.Glide;
 import com.facebook.drawee.backends.pipeline.Fresco;
 
-public class LoginActivity extends BaseActivity {
+
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.OutputStreamWriter;
+
+import static android.R.id.edit;
+
+public class LoginActivity extends FragmentActivity {
+
     private MySqliteHelper helper;
     Button sign;
     Button reg;
@@ -32,39 +44,28 @@ public class LoginActivity extends BaseActivity {
 
         //用户已存在，直接登录
 
+        user = (EditText)findViewById(R.id.username);
+        pwd=(EditText)findViewById(R.id.userpwd);
+        SharedPreferences pref =getSharedPreferences("data",MODE_PRIVATE);
+        String name=pref.getString("username","");
+        String password=pref.getString("password","");
+        if(!TextUtils.isEmpty(name)) {
+            user.setText(name);
+            user.setSelection(name.length());
+            pwd.setText(password);
+            pwd.setSelection(pwd.length());
+            select();
+        }
 
         //播放动图
-        //com.facebook.drawee.view.SimpleDraweeView mGif=(com.facebook.drawee.view.SimpleDraweeView)findViewById(R.id.gif);
-        //ImageView imageView = (ImageView) findViewById(R.id.gif);
         ImageView  iv = (ImageView)findViewById(R.id.gif);
         ImageView  iv1 = (ImageView)findViewById(R.id.gif1);
         ImageView  iv2 = (ImageView)findViewById(R.id.gif2);
-        //String   url = "res://" + getPackageName() + "/" + R.drawable.hello;
-        //String   url = "http://img.zcool.cn/community/01619357b185dc0000018c1b86ea68.gif";
-        //String   url = "http://img.mp.itc.cn/upload/20161106/ab60d2070c8a4b3c9c4c69e18d30a464_th.gif";
         String url="http://img1.2345.com/duoteimg/qqbiaoqing/160812512480/23.gif";
         //加载图片
-        //Glide.with(this).load(url).placeholder(R.mipmap.place).error(R.mipmap.icon_photo_error).into(mIv);
         Glide.with(LoginActivity.this).load(url).into(iv);
         Glide.with(LoginActivity.this).load(url).into(iv1);
         Glide.with(LoginActivity.this).load(url).into(iv2);
-
-        //Glide.with(this).load(url).placeholder(R.mipmap.place).error(R.mipmap.icon_photo_error).into(mIv);//GlideApp.with(this).load("http://goo.gl/gEgYUd").into(imageView);
-//本地文件
-//        File file = new File(Environment.getExternalStorageDirectory(), "hello.gif");
-//        //加载图片
-//        Glide.with(this).load(file).into(iv);
-//        Glide.with(this).load(mGif).placeholder(R.mipmap.place).error(R.mipmap.icon_photo_error).into(mIv);
-//        SimpleDraweeView s = (SimpleDraweeView) this.findViewById(R.id.gif);
-//        DraweeController mDraweeController = Fresco.newDraweeControllerBuilder()
-//                .setAutoPlayAnimations(true)
-//                //设置uri,加载本地的gif资源
-//                .setUri(Uri.parse("res://" + getPackageName() + "/" + R.drawable.hello))//设置uri
-//                .build();
-////设置Controller
-//        s.setController(mDraweeController);
-
-
 
         sign=(Button)findViewById(R.id.login);
         reg=(Button)findViewById(R.id.register);
@@ -74,7 +75,6 @@ public class LoginActivity extends BaseActivity {
             public void onClick(View v) {
                 select();
 
-
             }
 
         });
@@ -82,10 +82,13 @@ public class LoginActivity extends BaseActivity {
             @Override
             public void onClick(View v) {
                 insert();
+                SharedPreferences.Editor editor=getSharedPreferences("data",MODE_PRIVATE).edit();
+                editor.putString("username",user.getText().toString());
+                editor.putString("password",pwd.getText().toString());
+                editor.apply();
             }
         });
-        user = (EditText)findViewById(R.id.username);
-        pwd=(EditText)findViewById(R.id.userpwd);
+
 
     }
 
@@ -101,17 +104,17 @@ public class LoginActivity extends BaseActivity {
 
         //查询一下，是否用户名重复
         String sql1 = "select * from users";
-            Cursor cursor = db.rawQuery(sql1, null);
-            while (cursor.moveToNext()) {
-                //第一列为id
-                name =  cursor.getString(1); //获取第2列的值,第一列的索引从0开始
-                mypwd = cursor.getString(2);//获取第3列的值
+        Cursor cursor = db.rawQuery(sql1, null);
+        while (cursor.moveToNext()) {
+            //第一列为id
+            name =  cursor.getString(1); //获取第2列的值,第一列的索引从0开始
+            mypwd = cursor.getString(2);//获取第3列的值
 
-                if((user.getText().toString().isEmpty())||(pwd.getText().toString().isEmpty())){
+            if((user.getText().toString().isEmpty())||(pwd.getText().toString().isEmpty())){
 
-                    Toast.makeText(this, "不能为空，请重新输入", Toast.LENGTH_SHORT).show();
-                    break;
-                }
+                Toast.makeText(this, "不能为空，请重新输入", Toast.LENGTH_SHORT).show();
+                break;
+            }
 
 
             userflag = 1;  //不存在此用户
@@ -133,6 +136,7 @@ public class LoginActivity extends BaseActivity {
             String sql2 = "insert into users(name,pwd) values ('"+user.getText().toString()+"','"+pwd.getText().toString()+"')";
             db.execSQL(sql2);
             Toast.makeText(this, "注册成功！", Toast.LENGTH_SHORT).show();
+
         }
 
 
