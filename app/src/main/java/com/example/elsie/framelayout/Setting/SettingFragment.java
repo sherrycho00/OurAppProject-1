@@ -1,4 +1,4 @@
-package com.example.elsie.framelayout;
+package com.example.elsie.framelayout.Setting;
 
 import android.content.ComponentName;
 import android.content.Intent;
@@ -7,6 +7,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+
+import com.example.elsie.framelayout.R;
 
 /**
  * Created by Elsie on 2017/11/3.

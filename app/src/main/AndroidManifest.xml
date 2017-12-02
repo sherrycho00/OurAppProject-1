@@ -20,8 +20,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ChatActivity" />
-        <activity android:name=".PersonalSettingActivity" />
+        <activity android:name=".Chat.ChatActivity" />
+        <activity android:name=".Setting.PersonalSettingActivity" />
 
         <provider
             android:name="android.support.v4.content.FileProvider"
@@ -33,7 +33,7 @@
                 android:resource="@xml/file_paths" />
         </provider>
 
-        <activity android:name=".FeedbackActivity" />
+        <activity android:name=".Setting.FeedbackActivity" />
 
         <!--支付宝活动注册-->
         <activity

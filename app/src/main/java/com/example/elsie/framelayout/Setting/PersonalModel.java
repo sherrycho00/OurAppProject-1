@@ -1,4 +1,4 @@
-package com.example.elsie.framelayout;
+package com.example.elsie.framelayout.Setting;
 
 /**
  * Created by sherry on 17-12-1.

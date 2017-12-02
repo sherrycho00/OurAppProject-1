@@ -4,6 +4,6 @@
 
     <version value="1"></version>
     <list>
-        <mapping class="com.example.elsie.framelayout.PersonalModel"></mapping>
+        <mapping class="com.example.elsie.framelayout.Setting.PersonalModel"></mapping>
     </list>
 </litepal>

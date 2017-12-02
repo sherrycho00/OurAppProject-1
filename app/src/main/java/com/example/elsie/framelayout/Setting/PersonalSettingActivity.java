@@ -1,4 +1,4 @@
-package com.example.elsie.framelayout;
+package com.example.elsie.framelayout.Setting;
 
 import android.content.Context;
 import android.content.DialogInterface;
@@ -21,6 +21,10 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.example.elsie.framelayout.BaseActivity;
+import com.example.elsie.framelayout.R;
+import com.example.elsie.framelayout.Utils.ImageUtils;
+
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
@@ -30,7 +34,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 
-public class PersonalSettingActivity extends BaseActivity{
+public class PersonalSettingActivity extends BaseActivity {
 
     private static final String TAG = "PersonalSettingActivity";
     private SQLiteDatabase users;
