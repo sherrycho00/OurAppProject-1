@@ -1,4 +1,4 @@
-package com.example.elsie.framelayout.entity;
+package com.example.elsie.framelayout.Rank;
 
 import java.io.Serializable;
 import java.util.List;

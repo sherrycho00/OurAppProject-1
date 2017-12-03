@@ -5,6 +5,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.widget.DrawerLayout;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -73,8 +74,10 @@ public class RankFragment extends android.support.v4.app.Fragment{
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 switch (position) {
                     case 0:
+                        Log.e("Rank","1floor");
                         Toast.makeText(getContext(),"1floor",Toast.LENGTH_LONG).show();
                         Fragment dishFragment = new DishFragment();
+                        Toast.makeText(getContext(),"error?",Toast.LENGTH_LONG).show();
                         FragmentManager fm = getFragmentManager();
                         FragmentTransaction transaction = fm.beginTransaction();
                         transaction.add(R.id.dish_lycontent,dishFragment);
