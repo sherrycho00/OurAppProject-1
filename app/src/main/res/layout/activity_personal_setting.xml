@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    tools:context="com.example.elsie.framelayout.Setting.PersonalSettingActivity">
+    <include layout="@layout/profile_top"></include>
+    <com.makeramen.roundedimageview.RoundedImageView
+        android:id="@+id/image_user"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="41dp"
+        android:layout_gravity="center"
+        android:src="@drawable/userimg"
+        app:riv_border_color="#ffffff"
+        app:riv_border_width="2dp"
+        app:riv_oval="true" />
+
+    <Button
+        android:id="@+id/btn_change"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:paddingLeft="15dp"
+        android:gravity="center_vertical"
+        android:drawablePadding="10dp"
+        android:text="修改头像"
+        android:textSize="16dp"
+        android:background="@drawable/bcg_shape"/>
+
+    <!--隔离选项之间的横线-->
+    <View
+        android:layout_width="fill_parent"
+        android:layout_height="1dp"
+        android:background="#90909090"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp" />
+
+    <EditText android:id="@+id/usr_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingLeft="15dp"
+        android:paddingTop="15dp"
+        android:paddingBottom="10dp"
+        android:gravity="center_vertical"
+        android:drawablePadding="10dp"
+        android:hint="请输入昵称"
+        android:textSize="16dp"
+        android:background="@drawable/bcg_shape"/>
+
+    <View
+        android:layout_width="fill_parent"
+        android:layout_height="1dp"
+        android:background="#90909090"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp" />
+
+    <EditText android:id="@+id/usr_mail"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingLeft="15dp"
+        android:paddingTop="15dp"
+        android:paddingBottom="10dp"
+        android:gravity="center_vertical"
+        android:drawablePadding="10dp"
+        android:hint="请输入邮箱"
+        android:textSize="16dp"
+        android:background="@drawable/bcg_shape"/>
+
+    <Button
+        android:id="@+id/exit"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:paddingLeft="15dp"
+        android:gravity="center"
+        android:drawablePadding="10dp"
+        android:text="退出登录"
+        android:textSize="16dp"
+        android:background="#fffff0"/>
+
+</LinearLayout>

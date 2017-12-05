@@ -1,22 +1,21 @@
 package com.example.elsie.framelayout;
 
-import android.app.Fragment;
 import android.content.Intent;
-import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
+import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
-import android.telecom.TelecomManager;
 import android.view.View;
 import android.view.Window;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import static com.example.elsie.framelayout.R.color.black;
-import static com.example.elsie.framelayout.R.color.blue;
-import static com.example.elsie.framelayout.R.color.material_blue_grey_800;
+import com.example.elsie.framelayout.Chat.ChatActivity;
+import com.example.elsie.framelayout.Chat.ChatFragment;
+import com.example.elsie.framelayout.Rank.RankFragment;
+import com.example.elsie.framelayout.Setting.SettingFragment;
+
 import static com.example.elsie.framelayout.R.color.material_grey_50;
 
 public class  MainActivity extends FragmentActivity implements View.OnClickListener{

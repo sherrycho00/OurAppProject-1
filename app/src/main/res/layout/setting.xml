@@ -24,7 +24,7 @@
             android:layout_toRightOf="@+id/image_user"
             android:layout_marginTop="10dp"
             android:layout_marginLeft="15dp"
-            android:text="昵称"
+            android:text="xiaopang"
             android:textSize="20sp"/>
         <TextView
             android:layout_width="wrap_content"
@@ -59,14 +59,14 @@
         android:layout_marginRight="15dp" />
 
     <Button
-        android:id="@+id/setting"
+        android:id="@+id/usr_setting"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingLeft="15dp"
         android:gravity="center_vertical"
         android:drawablePadding="10dip"
         android:drawableLeft="@drawable/setting"
-        android:text="设置"
+        android:text="账号设置"
         android:textSize="16dp"
         android:background="@drawable/bcg_shape"/>
 
@@ -85,7 +85,7 @@
         android:gravity="center_vertical"
         android:drawablePadding="10dip"
         android:drawableLeft="@drawable/share"
-        android:text="分享"
+        android:text="分享饭否"
         android:textSize="16dp"
         android:background="@drawable/bcg_shape"/>
 
@@ -141,8 +141,8 @@
         android:paddingLeft="15dp"
         android:gravity="center_vertical"
         android:drawablePadding="10dp"
-        android:drawableLeft="@drawable/exit"
-        android:text="退出"
+        android:drawableLeft="@drawable/pay"
+        android:text="饭卡充值"
         android:textSize="16dp"
         android:background="@drawable/bcg_shape"/>
 

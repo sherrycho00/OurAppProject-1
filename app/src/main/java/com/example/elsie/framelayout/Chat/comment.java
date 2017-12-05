@@ -1,4 +1,4 @@
-package com.example.elsie.framelayout;
+package com.example.elsie.framelayout.Chat;
 
 import android.widget.LinearLayout;
 import android.widget.TextView;
