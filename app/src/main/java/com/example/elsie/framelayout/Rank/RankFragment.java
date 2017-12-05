@@ -33,6 +33,7 @@ public class RankFragment extends android.support.v4.app.Fragment{
     private ImageView               mFloor;
     private boolean                 ImageFlag;
 
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.rank,container,false);
@@ -77,7 +78,6 @@ public class RankFragment extends android.support.v4.app.Fragment{
                         Log.e("Rank","1floor");
                         Toast.makeText(getContext(),"1floor",Toast.LENGTH_LONG).show();
                         Fragment dishFragment = new DishFragment();
-                        Toast.makeText(getContext(),"error?",Toast.LENGTH_LONG).show();
                         FragmentManager fm = getFragmentManager();
                         FragmentTransaction transaction = fm.beginTransaction();
                         transaction.add(R.id.dish_lycontent,dishFragment);

@@ -6,6 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.elsie.framelayout.R;
 
@@ -19,6 +20,7 @@ public class MenuAdapter extends RecyclerView.Adapter<MenuAdapter.ViewHolder> {
 
 //    建立一个数据源
     private List<Product> DishList;
+
 
 //    默认构造函数
     public MenuAdapter(List<Product> dishList) {
@@ -41,14 +43,32 @@ public class MenuAdapter extends RecyclerView.Adapter<MenuAdapter.ViewHolder> {
     //	  对RecycleView子项进行操作
 //    对RecyleView子项的数据进行赋值，在每个子项被滚动到屏幕内的时候执行
     @Override
-    public void onBindViewHolder(MenuAdapter.ViewHolder holder, int position) {
-        Product dish = DishList.get(position);
+    public void onBindViewHolder(final MenuAdapter.ViewHolder holder, int position) {
+        final Product dish = DishList.get(position);
 
         holder.dishPrice.setText("￥"+(int) dish.getFoodPrice());
         holder.dishName.setText(dish.getFoodName());
         holder.dishCommend.setText(dish.getSalesCount()+"人推荐");
 //        holder.dishImageView.setImageResource(Integer.parseInt(dish.getImageUrl()));
         holder.dishImageView.setImageResource(R.drawable.dish);
+
+        holder.likeDish.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                int num = 0;
+                num = dish.getSalesCount();
+                num ++;
+                dish.setSalesCount(num);
+                holder.dishCommend.setText(dish.getSalesCount()+"人推荐");
+//                换图片
+            }
+        });
+        holder.dislikeDish.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(v.getContext(),"click dislike",Toast.LENGTH_LONG).show();
+            }
+        });
 
 
     }

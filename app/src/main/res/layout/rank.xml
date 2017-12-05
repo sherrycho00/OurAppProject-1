@@ -4,12 +4,12 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-
-
     <LinearLayout
+        android:id="@+id/rank_top"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"       >
+        android:orientation="horizontal"
+        android:visibility="visible">
         <ImageView
             android:id="@+id/floor"
             android:layout_width="40dp"
@@ -33,6 +33,8 @@
 
     </LinearLayout>
 
+
+
     <android.support.v4.widget.DrawerLayout
         android:id="@+id/drawer_layout"
         android:layout_width="match_parent"
@@ -44,6 +46,7 @@
             android:id="@+id/dish_lycontent"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
+
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/menu_lv"
                 android:layout_width="match_parent"
