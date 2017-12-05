@@ -46,6 +46,7 @@ public class MenuAdapter extends RecyclerView.Adapter<MenuAdapter.ViewHolder> {
     public void onBindViewHolder(final MenuAdapter.ViewHolder holder, int position) {
         final Product dish = DishList.get(position);
 
+        final boolean[] isClick = {false,false};
         holder.dishPrice.setText("￥"+(int) dish.getFoodPrice());
         holder.dishName.setText(dish.getFoodName());
         holder.dishCommend.setText(dish.getSalesCount()+"人推荐");
@@ -55,18 +56,51 @@ public class MenuAdapter extends RecyclerView.Adapter<MenuAdapter.ViewHolder> {
         holder.likeDish.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                int num = 0;
-                num = dish.getSalesCount();
-                num ++;
-                dish.setSalesCount(num);
-                holder.dishCommend.setText(dish.getSalesCount()+"人推荐");
+
+                int flag = 0;
+//                实现只能点击一次
+//                点击赞
+                if (!isClick[0]) {
+                    int num = 0;
+                    num = dish.getSalesCount();
+                    num ++;
+                    dish.setSalesCount(num);
+                    holder.dishCommend.setText(dish.getSalesCount()+"人推荐");
+
+                    Toast.makeText(v.getContext(),"click like",Toast.LENGTH_LONG).show();
 //                换图片
+                    holder.likeDish.setImageResource(R.drawable.dish_like_filling);
+
+                    isClick[0] = true;
+                    flag = 1;
+                }
+
+//                取消赞
+                if (isClick[0] && flag == 0) {
+                    int num = 0;
+                    num = dish.getSalesCount();
+                    num --;
+                    dish.setSalesCount(num);
+                    holder.dishCommend.setText(dish.getSalesCount()+"人推荐");
+                    Toast.makeText(v.getContext(),"cancle click like",Toast.LENGTH_LONG).show();
+//                换图片
+                    holder.likeDish.setImageResource(R.drawable.dish_like);
+
+                    isClick[0] = false;
+                }
+
+
+
             }
         });
         holder.dislikeDish.setOnClickListener(new View.OnClickListener() {
+//            点击了赞就要先点击取消赞然后才能点击贬
             @Override
             public void onClick(View v) {
-                Toast.makeText(v.getContext(),"click dislike",Toast.LENGTH_LONG).show();
+                if (!isClick[0] && !isClick[1]) {
+                    Toast.makeText(v.getContext(),"click dislike",Toast.LENGTH_LONG).show();
+                    isClick[1] = true;
+                }
             }
         });
 
