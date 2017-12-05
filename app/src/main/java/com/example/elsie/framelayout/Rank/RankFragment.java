@@ -5,7 +5,6 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.widget.DrawerLayout;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,6 +13,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.elsie.framelayout.R;
@@ -32,6 +32,7 @@ public class RankFragment extends android.support.v4.app.Fragment{
     private ListView                listView;
     private ImageView               mFloor;
     private boolean                 ImageFlag;
+    private TextView                mWhichFloor;
 
 
     @Override
@@ -46,13 +47,16 @@ public class RankFragment extends android.support.v4.app.Fragment{
             public void onClick(View v) {
                 if (ImageFlag){
                     mFloor.setBackgroundResource(R.drawable.chat);
+                    mWhichFloor.setVisibility(View.GONE);
                     mDrawerLayout.openDrawer(Gravity.LEFT);
                     ImageFlag = false;
                 }else{
                     mFloor.setBackgroundResource(R.drawable.graychat);
+                    mWhichFloor.setVisibility(View.VISIBLE);
                     mDrawerLayout.closeDrawer(Gravity.LEFT);
                     ImageFlag = true;
                 }
+
             }
         });
 
@@ -66,6 +70,8 @@ public class RankFragment extends android.support.v4.app.Fragment{
         list.add("一楼");
         list.add("二楼");
         list.add("三楼");
+        list.add("清真");
+        list.add("红楼");
 
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(getContext(),
                 android.R.layout.simple_list_item_1, list);
@@ -75,7 +81,6 @@ public class RankFragment extends android.support.v4.app.Fragment{
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 switch (position) {
                     case 0:
-                        Log.e("Rank","1floor");
                         Toast.makeText(getContext(),"1floor",Toast.LENGTH_LONG).show();
                         Fragment dishFragment = new DishFragment();
                         FragmentManager fm = getFragmentManager();
@@ -83,18 +88,44 @@ public class RankFragment extends android.support.v4.app.Fragment{
                         transaction.add(R.id.dish_lycontent,dishFragment);
                         transaction.commit();
                         mFloor.setBackgroundResource(R.drawable.graychat);
+                        mWhichFloor.setText("一楼");
+                        mWhichFloor.setVisibility(View.VISIBLE);
                         mDrawerLayout.closeDrawer(Gravity.LEFT);
+                        ImageFlag = true;
 
                         break;
                     case 1:
                         Toast.makeText(getContext(),"2floor",Toast.LENGTH_LONG).show();
-                        mFloor.setBackgroundResource(R.drawable.graychat);
+                        mWhichFloor.setText("二楼");
+                        mWhichFloor.setVisibility(View.VISIBLE);
                         mDrawerLayout.closeDrawer(Gravity.LEFT);
+                        ImageFlag = true;
                         break;
                     case 2:
                         Toast.makeText(getContext(),"3floor",Toast.LENGTH_LONG).show();
                         mFloor.setBackgroundResource(R.drawable.graychat);
+                        mWhichFloor.setText("三楼");
+                        mWhichFloor.setVisibility(View.VISIBLE);
                         mDrawerLayout.closeDrawer(Gravity.LEFT);
+                        ImageFlag = true;
+                        break;
+
+                    case 3:
+                        Toast.makeText(getContext(),"清真",Toast.LENGTH_LONG).show();
+                        mFloor.setBackgroundResource(R.drawable.graychat);
+                        mWhichFloor.setText("清真");
+                        mWhichFloor.setVisibility(View.VISIBLE);
+                        mDrawerLayout.closeDrawer(Gravity.LEFT);
+                        ImageFlag = true;
+                        break;
+
+                    case 4:
+                        Toast.makeText(getContext(),"红楼",Toast.LENGTH_LONG).show();
+                        mFloor.setBackgroundResource(R.drawable.graychat);
+                        mWhichFloor.setText("红楼");
+                        mWhichFloor.setVisibility(View.VISIBLE);
+                        mDrawerLayout.closeDrawer(Gravity.LEFT);
+                        ImageFlag = true;
                         break;
                     default:
                         break;
@@ -113,6 +144,7 @@ public class RankFragment extends android.support.v4.app.Fragment{
         mDrawerLayout = (DrawerLayout) view.findViewById(R.id.drawer_layout);
         listView      = (ListView) view.findViewById(R.id.listView);
         mFloor        = (ImageView) view.findViewById(R.id.floor);
+        mWhichFloor   = (TextView) view.findViewById(R.id.which_floor);
     }
 }
 
