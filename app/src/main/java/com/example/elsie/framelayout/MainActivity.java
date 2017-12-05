@@ -1,6 +1,5 @@
 package com.example.elsie.framelayout;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
@@ -11,7 +10,6 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.example.elsie.framelayout.Chat.ChatActivity;
 import com.example.elsie.framelayout.Chat.ChatFragment;
 import com.example.elsie.framelayout.Rank.RankFragment;
 import com.example.elsie.framelayout.Setting.SettingFragment;
@@ -151,8 +149,6 @@ public class  MainActivity extends FragmentActivity implements View.OnClickListe
             case 1:
                 if (Chat == null){
                     Chat = new ChatFragment();
-                    Intent intent=new Intent(MainActivity.this,ChatActivity.class);
-                    startActivity(intent);
                     transaction.add(R.id.frameLayoutContent,Chat);
 
                 }else{
