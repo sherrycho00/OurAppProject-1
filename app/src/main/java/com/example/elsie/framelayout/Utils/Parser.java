@@ -30,7 +30,7 @@ public class Parser {
 
           DataResult dataResult;
         List<Product> products=new ArrayList<Product>();;
-        //获取raw，通过文件六的方式，再通过引用的Gson解析
+        //获取raw，通过文件流的方式，再通过引用的Gson解析
 //        通过该方法获得raw文件，取得对应
         InputStream is = ctx.getResources().openRawResource(R.raw.dish_json);
         try {

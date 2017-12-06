@@ -1,5 +1,4 @@
 {
-    "error":false,
     "results":[
         {
             "_id":1,
@@ -23,7 +22,7 @@
                     "ID":103,
                     "foodName":"手撕鸡103",
                     "foodPrice":22.5,
-                    "salesCount":101,
+                    "salesCount":103,
                     "imageUrl":"1"
                 },
 {

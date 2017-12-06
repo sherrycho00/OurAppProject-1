@@ -34,6 +34,7 @@ public class RankFragment extends android.support.v4.app.Fragment{
     private boolean                 ImageFlag;
     private TextView                mWhichFloor;
 
+   static public Floor2data              mFloorData;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -41,17 +42,19 @@ public class RankFragment extends android.support.v4.app.Fragment{
 
         initView(view);
 
+        mFloorData.setFloor(1);
+        int temp = mFloorData.getFloor();
         ImageFlag = true;
         mFloor.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (ImageFlag){
-                    mFloor.setBackgroundResource(R.drawable.chat);
+                    mFloor.setBackgroundResource(R.drawable.sort_filling);
                     mWhichFloor.setVisibility(View.GONE);
                     mDrawerLayout.openDrawer(Gravity.LEFT);
                     ImageFlag = false;
                 }else{
-                    mFloor.setBackgroundResource(R.drawable.graychat);
+                    mFloor.setBackgroundResource(R.drawable.sort);
                     mWhichFloor.setVisibility(View.VISIBLE);
                     mDrawerLayout.closeDrawer(Gravity.LEFT);
                     ImageFlag = true;
@@ -79,19 +82,20 @@ public class RankFragment extends android.support.v4.app.Fragment{
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
                 switch (position) {
                     case 0:
+
                         Toast.makeText(getContext(),"1floor",Toast.LENGTH_LONG).show();
-                        Fragment dishFragment = new DishFragment();
-                        FragmentManager fm = getFragmentManager();
-                        FragmentTransaction transaction = fm.beginTransaction();
-                        transaction.add(R.id.dish_lycontent,dishFragment);
-                        transaction.commit();
-                        mFloor.setBackgroundResource(R.drawable.graychat);
+                        mFloor.setBackgroundResource(R.drawable.sort);
                         mWhichFloor.setText("一楼");
                         mWhichFloor.setVisibility(View.VISIBLE);
                         mDrawerLayout.closeDrawer(Gravity.LEFT);
                         ImageFlag = true;
+
+//                        将数据按楼层分类
+                        mFloorData.setFloor(1);
+
 
                         break;
                     case 1:
@@ -100,14 +104,20 @@ public class RankFragment extends android.support.v4.app.Fragment{
                         mWhichFloor.setVisibility(View.VISIBLE);
                         mDrawerLayout.closeDrawer(Gravity.LEFT);
                         ImageFlag = true;
+//                        将数据按楼层分类
+                        mFloorData.setFloor(2);
+
                         break;
                     case 2:
                         Toast.makeText(getContext(),"3floor",Toast.LENGTH_LONG).show();
-                        mFloor.setBackgroundResource(R.drawable.graychat);
+                        mFloor.setBackgroundResource(R.drawable.sort);
                         mWhichFloor.setText("三楼");
                         mWhichFloor.setVisibility(View.VISIBLE);
                         mDrawerLayout.closeDrawer(Gravity.LEFT);
                         ImageFlag = true;
+//                        将数据按楼层分类
+                        mFloorData.setFloor(3);
+
                         break;
 
                     case 3:
@@ -117,6 +127,9 @@ public class RankFragment extends android.support.v4.app.Fragment{
                         mWhichFloor.setVisibility(View.VISIBLE);
                         mDrawerLayout.closeDrawer(Gravity.LEFT);
                         ImageFlag = true;
+//                        将数据按楼层分类
+                        mFloorData.setFloor(4);
+
                         break;
 
                     case 4:
@@ -126,13 +139,24 @@ public class RankFragment extends android.support.v4.app.Fragment{
                         mWhichFloor.setVisibility(View.VISIBLE);
                         mDrawerLayout.closeDrawer(Gravity.LEFT);
                         ImageFlag = true;
+//                        将数据按楼层分类
+                        mFloorData.setFloor(5);
+
                         break;
                     default:
                         break;
                 }
 
+                Fragment dishFragment = new DishFragment();
+                FragmentManager fm = getFragmentManager();
+                FragmentTransaction transaction = fm.beginTransaction();
+                transaction.replace(R.id.dish_lycontent,dishFragment);
+                transaction.commit();
+
+
             }
         });
+
 
 //        打开侧滑
 //        mDrawerLayout.openDrawer(Gravity.LEFT);
@@ -145,6 +169,8 @@ public class RankFragment extends android.support.v4.app.Fragment{
         listView      = (ListView) view.findViewById(R.id.listView);
         mFloor        = (ImageView) view.findViewById(R.id.floor);
         mWhichFloor   = (TextView) view.findViewById(R.id.which_floor);
+
+        mFloorData = new Floor2data();
     }
 }
 

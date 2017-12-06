@@ -16,16 +16,15 @@
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="150dp"
+            android:layout_height="130dp"
             android:background="@null">
 
             <ImageView
                 android:id="@+id/dish_imageView"
                 android:layout_width="match_parent"
-                android:layout_height="150dp"
+                android:layout_height="130dp"
                 android:contentDescription="图片"
-                android:scaleType="centerCrop"
-                android:src="@drawable/dish"               />
+                android:scaleType="centerCrop" />
 
 
             <TextView
@@ -64,7 +63,6 @@
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="10dp"
                         android:lines="1"
-                        android:text="梅菜扣肉"
                         android:textColor="@color/white"
                         android:textSize="15sp" />
 
