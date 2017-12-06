@@ -21,6 +21,8 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.List;
 
+import static com.example.elsie.framelayout.Rank.RankFragment.mFloorData;
+
 /**
  * Created by Elsie on 2017/12/3.
  */
@@ -101,8 +103,27 @@ public class MenuAdapter extends RecyclerView.Adapter<MenuAdapter.ViewHolder> {
 //                将数据写到json中
                 if (num != 0) {
                     int key = dish.getID();
-                    switch (mFloorData.getFloor())
-                    String floor = dish.getType();
+                    String floor = null;
+                    switch (mFloorData.getFloor()) {
+                        case 1:
+                            floor = "一楼";
+                            break;
+                        case 2:
+                            floor = "二楼";
+                            break;
+                        case 3:
+                            floor = "三楼";
+                            break;
+                        case 4:
+                            floor = "清真";
+                            break;
+                        case 5:
+                            floor = "红楼";
+                            break;
+                        default:
+                            break;
+                    }
+
                     writeJSON(key,num,floor);
                 }
 
@@ -114,10 +135,20 @@ public class MenuAdapter extends RecyclerView.Adapter<MenuAdapter.ViewHolder> {
 //            点击了赞就要先点击取消赞然后才能点击贬
             @Override
             public void onClick(View v) {
+
+                int flag = 0;
+//                点击不赞
                 if (!isClick[0] && !isClick[1]) {
                     Toast.makeText(v.getContext(),"click dislike",Toast.LENGTH_LONG).show();
                     isClick[1] = true;
+                    flag = 1;
                     holder.dislikeDish.setImageResource(R.drawable.dish_dislike_filling);
+                }
+//                取消不赞
+                if (!isClick[0] && isClick[1] && flag==0) {
+                    holder.dislikeDish.setImageResource(R.drawable.dish_dislike);
+                    isClick[1] = false;
+
                 }
             }
         });
@@ -168,13 +199,12 @@ public class MenuAdapter extends RecyclerView.Adapter<MenuAdapter.ViewHolder> {
                         JSONArray foodList = dataJson.getJSONArray("foodList");// 找到foodList的json数组
                         for (int i = 0; i < foodList.length(); i++) {
                             JSONObject dish = foodList.getJSONObject(i);// 获取foodList数组的第i个json对象
-                            if (dish.get("ID") == key) {
+                            if (dish.getInt("ID") == key) {
                                 dish.put("salesCount",value);
                                 break;
                             }
                         }
                         ws = dataJson.toString();
-                        System.out.println(ws);
                         break;
                     }
 
