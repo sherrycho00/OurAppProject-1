@@ -5,10 +5,10 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    tools:context="com.example.elsie.framelayout.Setting.PersonalSettingActivity">
+    tools:context="com.example.elsie.framelayout.PersonalSettingActivity">
     <include layout="@layout/profile_top"></include>
     <com.makeramen.roundedimageview.RoundedImageView
-        android:id="@+id/image_user"
+        android:id="@+id/usr_img"
         android:layout_width="100dp"
         android:layout_height="100dp"
         android:layout_alignParentTop="true"

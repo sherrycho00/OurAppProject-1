@@ -24,16 +24,9 @@
             android:layout_toRightOf="@+id/image_user"
             android:layout_marginTop="10dp"
             android:layout_marginLeft="15dp"
-            android:text="xiaopang"
+            android:text="昵称"
             android:textSize="20sp"/>
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/username"
-            android:layout_toRightOf="@+id/image_user"
-            android:layout_marginLeft="15dp"
-            android:layout_marginTop="8dp"
-            android:text="等级 3"/>
+
     </RelativeLayout>
 
     <!--六个选项的button-->
@@ -89,6 +82,26 @@
         android:textSize="16dp"
         android:background="@drawable/bcg_shape"/>
 
+
+    <View
+        android:layout_width="fill_parent"
+        android:layout_height="1dp"
+        android:background="#90909090"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp" />
+
+    <Button
+        android:id="@+id/exit"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingLeft="15dp"
+        android:gravity="center_vertical"
+        android:drawablePadding="10dp"
+        android:drawableLeft="@drawable/pay"
+        android:text="饭卡充值"
+        android:textSize="16dp"
+        android:background="@drawable/bcg_shape"/>
+
     <View
         android:layout_width="fill_parent"
         android:layout_height="1dp"
@@ -127,23 +140,5 @@
         android:textSize="16dp"
         android:background="@drawable/bcg_shape"/>
 
-    <View
-        android:layout_width="fill_parent"
-        android:layout_height="1dp"
-        android:background="#90909090"
-        android:layout_marginLeft="15dp"
-        android:layout_marginRight="15dp" />
-
-    <Button
-        android:id="@+id/exit"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:paddingLeft="15dp"
-        android:gravity="center_vertical"
-        android:drawablePadding="10dp"
-        android:drawableLeft="@drawable/pay"
-        android:text="饭卡充值"
-        android:textSize="16dp"
-        android:background="@drawable/bcg_shape"/>
 
 </LinearLayout>

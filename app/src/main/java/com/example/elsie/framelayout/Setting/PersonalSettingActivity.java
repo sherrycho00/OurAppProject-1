@@ -1,10 +1,8 @@
 package com.example.elsie.framelayout.Setting;
 
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
@@ -25,36 +23,36 @@ import com.example.elsie.framelayout.BaseActivity;
 import com.example.elsie.framelayout.R;
 import com.example.elsie.framelayout.Utils.ImageUtils;
 
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
+import org.litepal.tablemanager.Connector;
+
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.OutputStreamWriter;
+
+import static com.example.elsie.framelayout.Setting.SettingFragment.mheader_img;
+import static com.example.elsie.framelayout.Setting.SettingFragment.mnick_name;
 
 public class PersonalSettingActivity extends BaseActivity {
 
     private static final String TAG = "PersonalSettingActivity";
-    private SQLiteDatabase users;
     protected static final int CHOOSE_PICTURE = 0;
     protected static final int TAKE_PICTURE = 1;
     private static final int CROP_SMALL_PICTURE = 2;
     protected static Uri tempUri;
-    private ImageView image_user;
+    public static ImageView mimage_user;
     private EditText user_name;
     private EditText user_mail;
+    public static Bitmap mphoto;
+    public static String inputText1;
+    public static String inputText2;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_personal_setting);
+        Connector.getDatabase();
         user_name=(EditText)findViewById(R.id.usr_name);
         user_mail=(EditText)findViewById(R.id.usr_mail);
+        mimage_user = (ImageView) findViewById(R.id.usr_img);
 
 
-        final String inputText1=loadname();
-        final String inputText2=loadmail();
         Button save=(Button)findViewById(R.id.save);
         if(!TextUtils.isEmpty(inputText1)){
             user_name.setText(inputText1);
@@ -62,21 +60,32 @@ public class PersonalSettingActivity extends BaseActivity {
         }
         if(!TextUtils.isEmpty(inputText2)){
             user_mail.setText(inputText2);
+
             user_mail.setSelection(inputText2.length());
         }
         save.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                inputText1=user_name.getText().toString();
+                inputText2=user_mail.getText().toString();
+                PersonalModel Student=new PersonalModel();
+                Student.setName(inputText1);
+                Student.setMail(inputText2);
+                Student.setPhoto(mphoto);
+                mnick_name.setText(Student.getName());
+                user_name.setText(Student.getName());
+                user_mail.setText(Student.getMail());
+                //mimage_user.setImageBitmap(Student.getPhoto());
                 Toast.makeText(PersonalSettingActivity.this,"保存成功",Toast.LENGTH_SHORT).show();
             }
         });
         Button btn_change = (Button) findViewById(R.id.btn_change);
-        image_user = (ImageView) findViewById(R.id.image_user);
+
         btn_change.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View v) {
+
                 showChoosePicDialog();
             }
         });
@@ -103,98 +112,8 @@ public class PersonalSettingActivity extends BaseActivity {
         super.onDestroy();
         String inputText1=user_name.getText().toString();
         String inputText2=user_mail.getText().toString();
-        save1(inputText1);
-        save2(inputText2);
-    }
-    public void save1(String inputText){
-        FileOutputStream out=null;
-        BufferedWriter writer=null;
-        try{
-            out=openFileOutput("name", Context.MODE_PRIVATE);
-            writer=new BufferedWriter(new OutputStreamWriter(out));
-            writer.write(inputText);
-        }catch(IOException e){
-            e.printStackTrace();
-        }finally {
-            try{
-                if(writer!=null){
-                    writer.close();
-                }
-            }catch (IOException e){
-                e.printStackTrace();
-            }
-        }
-
-    }
-    public void save2(String inputText) {
-        FileOutputStream out = null;
-        BufferedWriter writer = null;
-        try {
-            out = openFileOutput("mail", Context.MODE_PRIVATE);
-            writer = new BufferedWriter(new OutputStreamWriter(out));
-            writer.write(inputText);
-        } catch (IOException e) {
-            e.printStackTrace();
-        } finally {
-            try {
-                if (writer != null) {
-                    writer.close();
-                }
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
     }
 
-     public String loadname() {
-         FileInputStream in=null;
-         BufferedReader reader=null;
-         StringBuilder content=new StringBuilder();
-         try{
-             in=openFileInput("name");
-             reader=new BufferedReader(new InputStreamReader(in));
-             String line="";
-             while ((line=reader.readLine())!=null){
-                 content.append(line);
-             }
-         }catch (IOException e){
-             e.printStackTrace();
-         }finally {
-             if(reader!=null){
-                 try{
-                     reader.close();
-                 }catch (IOException e){
-                     e.printStackTrace();
-                 }
-             }
-             return content.toString();
-         }
-     }
-
-    public String loadmail() {
-        FileInputStream in=null;
-        BufferedReader reader=null;
-        StringBuilder content=new StringBuilder();
-        try{
-            in=openFileInput("mail");
-            reader=new BufferedReader(new InputStreamReader(in));
-            String line="";
-            while ((line=reader.readLine())!=null){
-                content.append(line);
-            }
-        }catch (IOException e){
-            e.printStackTrace();
-        }finally {
-            if(reader!=null){
-                try{
-                    reader.close();
-                }catch (IOException e){
-                    e.printStackTrace();
-                }
-            }
-            return content.toString();
-        }
-    }
     /**
      * 显示修改头像的对话框
      */
@@ -235,10 +154,10 @@ public class PersonalSettingActivity extends BaseActivity {
         if (resultCode == RESULT_OK) { // 如果返回码是可以用的
             switch (requestCode) {
                 case TAKE_PICTURE:
-                    startPhotoZoom(tempUri); // 开始对图片进行裁剪处理
+                    startPhotoZoom(tempUri); // 对图片进行裁剪处理
                     break;
                 case CHOOSE_PICTURE:
-                    startPhotoZoom(data.getData()); // 开始对图片进行裁剪处理
+                    startPhotoZoom(data.getData()); // 对图片进行裁剪处理
                     break;
                 case CROP_SMALL_PICTURE:
                     if (data != null) {
@@ -281,27 +200,24 @@ public class PersonalSettingActivity extends BaseActivity {
     protected void setImageToView(Intent data) {
         Bundle extras = data.getExtras();
         if (extras != null) {
-            Bitmap photo = extras.getParcelable("data");
-            Log.d(TAG,"setImageToView:"+photo);
-            photo = ImageUtils.toRoundBitmap(photo); // 处理后的图片
-            image_user.setImageBitmap(photo);
-            //image_user.setImageBitmap(photo);
-            uploadPic(photo);
+            mphoto = extras.getParcelable("data");
+            Log.d(TAG,"setImageToView:"+mphoto);
+            mphoto = ImageUtils.toRoundBitmap(mphoto); // 处理后的图片
+            mimage_user.setImageBitmap(mphoto);
+            mheader_img.setImageBitmap(mphoto);
+
+            uploadPic(mphoto);
         }
     }
 
     private void uploadPic(Bitmap bitmap) {
         // 上传至服务器
-        // ... 可以在这里把Bitmap转换成file，然后得到file的url，做文件上传操作
-        // 注意这里得到的图片已经是圆形图片了
-        // bitmap是没有做过圆形处理的，但已经被裁剪了
+        // 把Bitmap转换成file，然后得到file的url，做文件上传操作
         String imagePath = ImageUtils.savePhoto(bitmap, Environment
                 .getExternalStorageDirectory().getAbsolutePath(), String
                 .valueOf(System.currentTimeMillis()));
         Log.e("imagePath", imagePath+"");
         if(imagePath != null){
-            // 拿着imagePath上传了
-            // ...
             Log.d(TAG,"imagePath:"+imagePath);
         }
     }
@@ -313,7 +229,7 @@ public class PersonalSettingActivity extends BaseActivity {
         if (requestCode == 1 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
 
         } else {
-            // 没有获取 到权限，从新请求，或者关闭app
+            // 没有获取到权限，重新请求，或者关闭app
             Toast.makeText(this, "需要存储权限", Toast.LENGTH_SHORT).show();
         }
     }
