@@ -11,6 +11,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.elsie.framelayout.Chat.ChatFragment;
+import com.example.elsie.framelayout.Home.HomeFragment;
 import com.example.elsie.framelayout.Rank.RankFragment;
 import com.example.elsie.framelayout.Setting.SettingFragment;
 

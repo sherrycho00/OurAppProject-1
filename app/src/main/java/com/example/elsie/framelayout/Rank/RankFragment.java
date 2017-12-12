@@ -8,9 +8,11 @@ import android.support.v4.widget.DrawerLayout;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -26,48 +28,58 @@ import java.util.List;
  * 排行榜界面
  */
 
-public class RankFragment extends android.support.v4.app.Fragment{
+public class RankFragment extends android.support.v4.app.Fragment implements OnClickListener{
 
     private DrawerLayout            mDrawerLayout;
     private ListView                listView;
     private ImageView               mFloor;
     private boolean                 ImageFlag;
     private TextView                mWhichFloor;
+    private Button                  mDishRank;
+    private Button                  mServiceRank;
 
-   static public Floor2data              mFloorData;
+    private Fragment                dishFragment,serviceFragment;
+    private FragmentManager         fm;
+    private FragmentTransaction     transaction;
+
+    private String                  flag ;//用来标记点击的是哪个按钮
+
+    static public Floor2data              mFloorData;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.rank,container,false);
 
+        flag = "service";
         initView(view);
 
         mFloorData.setFloor(1);
-        int temp = mFloorData.getFloor();
         ImageFlag = true;
-        mFloor.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (ImageFlag){
-                    mFloor.setBackgroundResource(R.drawable.sort_filling);
-                    mWhichFloor.setVisibility(View.GONE);
-                    mDrawerLayout.openDrawer(Gravity.LEFT);
-                    ImageFlag = false;
-                }else{
-                    mFloor.setBackgroundResource(R.drawable.sort);
-                    mWhichFloor.setVisibility(View.VISIBLE);
-                    mDrawerLayout.closeDrawer(Gravity.LEFT);
-                    ImageFlag = true;
-                }
-
-            }
-        });
+        mFloor.setOnClickListener(this);
 
 
         initData();
+
+        mDishRank.setOnClickListener(this);
+        mServiceRank.setOnClickListener(this);
+
+
+        show();//该函数放在这就只是启动时运行，要想每次点击运行应该将其放在按钮的点击项目中
         return view;
     }
 
+    private void show() {
+        if (flag == "dish")
+        { transaction.replace(R.id.dish_lycontent,dishFragment);
+            transaction.commit();}
+
+        if (flag == "service")
+            Toast.makeText(getContext(),"this is serviceFragment",Toast.LENGTH_LONG).show();
+//            transaction.replace(R.id.dish_lycontent,serviceFragment);
+//        transaction.commit();
+    }
+
+    //初始化放到listView中的数据
     private void initData() {
         final List<String> list = new ArrayList<String>();
         list.add("一楼");
@@ -147,11 +159,11 @@ public class RankFragment extends android.support.v4.app.Fragment{
                         break;
                 }
 
-                Fragment dishFragment = new DishFragment();
-                FragmentManager fm = getFragmentManager();
-                FragmentTransaction transaction = fm.beginTransaction();
-                transaction.replace(R.id.dish_lycontent,dishFragment);
-                transaction.commit();
+
+                dishFragment = new DishFragment();
+                fm = getFragmentManager();
+                transaction = fm.beginTransaction();
+
 
 
             }
@@ -169,8 +181,66 @@ public class RankFragment extends android.support.v4.app.Fragment{
         listView      = (ListView) view.findViewById(R.id.listView);
         mFloor        = (ImageView) view.findViewById(R.id.floor);
         mWhichFloor   = (TextView) view.findViewById(R.id.which_floor);
+        mDishRank     = (Button) view.findViewById(R.id.dish_rank);
+        mServiceRank  = (Button) view.findViewById(R.id.service_rank);
 
         mFloorData = new Floor2data();
+    }
+
+    //为点击事件添加监控
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            //点击楼层导致图标变化
+            case R.id.floor:
+                if (ImageFlag){
+                    mFloor.setBackgroundResource(R.drawable.sort_filling);
+                    mWhichFloor.setVisibility(View.GONE);
+                    mDrawerLayout.openDrawer(Gravity.LEFT);
+                    ImageFlag = false;
+                }else{
+                    mFloor.setBackgroundResource(R.drawable.sort);
+                    mWhichFloor.setVisibility(View.VISIBLE);
+                    mDrawerLayout.closeDrawer(Gravity.LEFT);
+                    ImageFlag = true;
+                }
+                break;
+
+//            //点击菜品
+//            case R.id.dish_rank:
+////                mDishRank.setBackgroundColor(Color.parseColor("#88888"));
+////                mServiceRank.setBackgroundColor(Color.parseColor("#ffffff"));
+//                //展示菜品
+//                flag = "dish";
+////                transaction.replace(R.id.dish_lycontent,dishFragment);
+////                transaction.commit();
+//
+//                break;
+//
+//            //点击服务人员
+//            case R.id.service_rank:
+////                mServiceRank.setBackgroundColor();
+////                mDishRank.setBackgroundColor(Color.parseColor("#ffffff"));
+//
+//                //展示服务人员评分
+////                transaction.replace(R.id.dish_lycontent,serviceFragment);
+////                transaction.commit();
+//                flag = "service";
+//                break;
+
+            case R.id.service_rank:
+            case R.id.dish_rank:
+            case R.id.listView:
+                if (v.getId() == R.id.service_rank)
+                    flag = "service";
+                if (v.getId() == R.id.dish_rank)
+                    flag = "dish";
+                Toast.makeText(getContext(),"miao?",Toast.LENGTH_SHORT).show();
+                show();
+                break;
+            default:
+                break;
+        }
     }
 }
 

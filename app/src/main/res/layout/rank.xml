@@ -14,22 +14,24 @@
             android:id="@+id/floor"
             android:layout_width="40dp"
             android:layout_height="match_parent"
-            android:background="@drawable/sort"
+            android:background="@drawable/list"
             android:layout_weight="0.04" />
+
+
 
         <Button
             android:id="@+id/dish_rank"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:background="#6ea0f8"
+            android:background="#ffffff"
             android:text="菜品" />
         <Button
             android:id="@+id/service_rank"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:background="#6ea0f8"
+            android:background="#ffffff"
             android:text="服务" />
 
     </LinearLayout>
@@ -48,7 +50,8 @@
     <android.support.v4.widget.DrawerLayout
         android:id="@+id/drawer_layout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:background="@android:color/transparent">
 
 
         <FrameLayout
@@ -69,8 +72,7 @@
             android:layout_width="150dp"
             android:layout_height="match_parent"
             android:layout_gravity="left"
-            android:choiceMode="singleChoice"
-            android:background="#ffffff"/>
+            android:choiceMode="singleChoice"/>
 
 
     </android.support.v4.widget.DrawerLayout>
