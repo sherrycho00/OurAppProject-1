@@ -23,12 +23,15 @@ public class comment {
     //点赞
     public static final int Z_TYPE_LIKE=0;//赞
     public static final int Z_TYPE_DISLIKE=1;//
+
     private String chat_name;
     private String chat_time;
     private String chat_content;
-    private int l_type;
-    private int w_type;
-    private int z_type;
+    private int l_type=0;
+    private int w_type=0;
+    private int z_type=0;
+
+
     com.makeramen.roundedimageview.RoundedImageView chat_img;
 
     public comment(String chat_name,String chat_time,String chat_content,int l_type,int w_type,int z_type){
@@ -59,4 +62,27 @@ public class comment {
         return z_type;
     }
 
+    public void setChat_name(String chat_name) {
+        this.chat_name = chat_name;
+    }
+
+    public void setChat_time(String chat_time) {
+        this.chat_time = chat_time;
+    }
+
+    public void setChat_content(String chat_content) {
+        this.chat_content = chat_content;
+    }
+
+    public void setL_type(int l_type) {
+        this.l_type = l_type;
+    }
+
+    public void setW_type(int w_type) {
+        this.w_type = w_type;
+    }
+
+    public void setZ_type(int z_type) {
+        this.z_type = z_type;
+    }
 }

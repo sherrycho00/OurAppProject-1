@@ -4,6 +4,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -36,6 +37,7 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.ViewHolder> {
         LinearLayout chat_like;
         LinearLayout chat_no_like;
         LinearLayout chat_comment;
+        TextView like_num;
         public ViewHolder(View view){
             super(view);
             chat_img=(com.makeramen.roundedimageview.RoundedImageView)view.findViewById(R.id.chat_user);
@@ -54,6 +56,8 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.ViewHolder> {
             chat_like=(LinearLayout) view.findViewById(R.id.like);
             chat_no_like=(LinearLayout) view.findViewById(R.id.no_like);
             chat_comment=(LinearLayout)view.findViewById(R.id.comment);
+            like_num=(TextView)view.findViewById(R.id.like_num);
+
         }
 
     }
@@ -69,8 +73,8 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.ViewHolder> {
     }
 
     @Override
-    public void onBindViewHolder(ViewHolder holder, int position) {
-        comment com=mComList.get(position);
+    public void onBindViewHolder(final ViewHolder holder, int position) {
+        final comment com=mComList.get(position);
         holder.chat_img.setVisibility(View.VISIBLE);
         holder.chat_content.setText(com.getChat_content());
         holder.chat_name.setText(com.getChat_name());
@@ -117,10 +121,10 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.ViewHolder> {
         if(com.getW_Type()==com.W_TYPE_OFFLINE){//离线
             //如果用户离线，则显示离线消息布局，将在线的消息布局隐藏
             holder.chat_state_online.setVisibility(View.GONE);
-            holder.chat_state_offline.setVisibility(View.VISIBLE);
+            holder.chat_state_offline.setVisibility(View.GONE);
         }else if (com.getW_Type()==com.W_TYPE_ONLINE){//在线
             //如果用户在线，则显示在线消息布局，将离线的消息布局隐藏
-            holder.chat_state_online.setVisibility(View.VISIBLE);
+            holder.chat_state_online.setVisibility(View.GONE);
             holder.chat_state_offline.setVisibility(View.GONE);
         }
 
@@ -135,12 +139,33 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.ViewHolder> {
             holder.chat_like.setVisibility(View.VISIBLE);
             holder.chat_no_like.setVisibility(View.GONE);
         }
+
+        holder.chat_like.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+//                int tmp=com.getLike_num();
+//                tmp++;
+//                com.setLike_num(tmp);
+//                holder.like_num.setText(tmp);
+                holder.chat_no_like.setVisibility(view.VISIBLE);
+                holder.chat_like.setVisibility(view.GONE);
+            }
+        });
+        holder.chat_no_like.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                holder.chat_no_like.setVisibility(view.GONE);
+                holder.chat_like.setVisibility(view.VISIBLE);
+            }
+        });
+
     }
 
     @Override
     public int getItemCount() {
         return mComList.size();
     }
+
 
 
 }

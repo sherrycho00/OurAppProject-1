@@ -1,9 +1,17 @@
 package com.example.elsie.framelayout;
 
+import android.Manifest;
+import android.content.ComponentName;
+import android.content.Intent;
+import android.content.ServiceConnection;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.os.IBinder;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v4.content.ContextCompat;
 import android.view.View;
 import android.view.Window;
 import android.widget.ImageView;
@@ -33,12 +41,36 @@ public class  MainActivity extends FragmentActivity implements View.OnClickListe
     private android.support.v4.app.Fragment Rank;
     private android.support.v4.app.Fragment Setting;
 
+    private DownloadService.DownloadBinder downloadBinder;
+
+    private ServiceConnection connection=new ServiceConnection() {
+        @Override
+        public void onServiceConnected(ComponentName name, IBinder service) {
+            downloadBinder=(DownloadService.DownloadBinder)service;
+        }
+
+        @Override
+        public void onServiceDisconnected(ComponentName componentName) {
+
+        }
+    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_main);
+        Intent intent = new Intent(MainActivity.this, DownloadService.class);
+        startService(intent);
+        bindService(intent, connection, BIND_AUTO_CREATE);
+
+                if (ContextCompat.checkSelfPermission(MainActivity.this, Manifest.permission.WRITE_EXTERNAL_STORAGE) !=
+                PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(MainActivity.this, new
+                    String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, 1);
+        }
+//        String url="http://10.0.2.2:8080/temp.json";
+//        downloadBinder.startDownload(url);
 
         initView();
 
@@ -46,7 +78,6 @@ public class  MainActivity extends FragmentActivity implements View.OnClickListe
 
 //        默认显示微信聊天界面
         setSelect(0);
-
 
     }
 

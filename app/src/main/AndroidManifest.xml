@@ -6,7 +6,8 @@
     <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS" />
     <!-- 往SDCard写入数据权限 -->
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
     <application
         android:name="org.litepal.LitePalApplication"
         android:allowBackup="true"
@@ -46,6 +47,11 @@
                 <category android:name="android.intent.category.DEFAULT"/>
             </intent-filter>
         </activity><!-- 分类详细列表 -->
+
+        <service
+            android:name=".DownloadService"
+            android:enabled="true"
+            android:exported="true"></service>
 
     </application>
 
