@@ -32,6 +32,13 @@
             android:background="#80000000"
             android:visibility="gone">
 
+            <Button
+                android:id="@+id/sub_else"
+                android:layout_width="250dp"
+                android:layout_height="match_parent"
+                android:background="@color/cardview_shadow_end_color"
+                android:text="               " />
+
             <LinearLayout
                 android:id="@+id/ll01"
                 android:layout_width="match_parent"
@@ -58,7 +65,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginRight="25dp"
-                    android:src="@drawable/chat_add_comment"
+                    android:src="@drawable/chat_sub_add_commend"
+                    app:backgroundTint="@color/red"
                     app:elevation="5dp"
                     app:fabSize="mini" />
             </LinearLayout>
@@ -90,11 +98,11 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginRight="25dp"
-                    android:src="@drawable/chat_add_comment"
+                    android:src="@drawable/chat_sub_add_dislike"
+                    app:backgroundTint="@android:color/darker_gray"
                     app:elevation="5dp"
-                    app:fabSize="mini"
 
-                    />
+                    app:fabSize="mini" />
             </LinearLayout>
 
             <LinearLayout
@@ -125,11 +133,11 @@
                     android:id="@+id/sub_add_date"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:src="@drawable/chat_add_comment"
+                    android:src="@drawable/chat_sub_add_date"
+                    app:backgroundTint="@color/frament_tab_color"
                     app:elevation="5dp"
-                    app:fabSize="mini"
 
-                    />
+                    app:fabSize="mini" />
             </LinearLayout>
 
             <LinearLayout
@@ -160,7 +168,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginRight="25dp"
                     android:src="@drawable/chat_sub_add_find"
-                    app:backgroundTint="@android:color/holo_green_light"
+                    app:backgroundTint="@color/blue"
                     app:elevation="5dp"
 
                     app:fabSize="mini" />
@@ -195,7 +203,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginRight="25dp"
-                    android:src="@drawable/chat_add_comment"
+                    android:src="@drawable/chat_sub_add_else"
+                    app:backgroundTint="@color/colorAccent"
                     app:elevation="5dp"
                     app:fabSize="mini" />
             </LinearLayout>
@@ -219,6 +228,8 @@
             android:src="@android:drawable/stat_notify_sync"
             app:backgroundTint="@color/material_blue_500"
             app:elevation="8dp" />
+
+
 
     </android.support.design.widget.CoordinatorLayout>
     <!--</android.support.v4.widget.SwipeRefreshLayout>-->

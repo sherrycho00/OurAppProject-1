@@ -19,7 +19,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:hint="请输入评论内容"
+            android:hint="说点什么吧..."
             android:maxLines="2"
             />
 
