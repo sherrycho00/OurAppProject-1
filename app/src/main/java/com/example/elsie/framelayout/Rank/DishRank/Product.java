@@ -1,4 +1,4 @@
-package com.example.elsie.framelayout.Rank;
+package com.example.elsie.framelayout.Rank.DishRank;
 
 import java.io.Serializable;
 

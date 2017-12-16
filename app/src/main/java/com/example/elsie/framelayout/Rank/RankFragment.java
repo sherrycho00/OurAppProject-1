@@ -19,6 +19,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.elsie.framelayout.R;
+import com.example.elsie.framelayout.Rank.DishRank.DishFragment;
+import com.example.elsie.framelayout.Rank.DishRank.Floor2data;
+import com.example.elsie.framelayout.Rank.ServiceRank.ServiceFragment;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -40,17 +43,19 @@ public class RankFragment extends android.support.v4.app.Fragment implements OnC
 
     private Fragment                dishFragment,serviceFragment;
     private FragmentManager         fm;
-    private FragmentTransaction     transaction;
+//    private FragmentTransaction     transaction;
 
     private String                  flag ;//用来标记点击的是哪个按钮
 
-    static public Floor2data              mFloorData;
+    static public Floor2data mFloorData;
+
+    private int                     dishClickFlag = 1 , serviceClickFlag = 1;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.rank,container,false);
 
-        flag = "service";
+        flag = "dish";
         initView(view);
 
         mFloorData.setFloor(1);
@@ -63,20 +68,33 @@ public class RankFragment extends android.support.v4.app.Fragment implements OnC
         mDishRank.setOnClickListener(this);
         mServiceRank.setOnClickListener(this);
 
+        serviceFragment = new ServiceFragment();
 
-        show();//该函数放在这就只是启动时运行，要想每次点击运行应该将其放在按钮的点击项目中
+        //讓界面初始化就有這個了
+       FragmentTransaction     transaction0;
+        dishFragment = new DishFragment();
+        fm = getFragmentManager();
+        transaction0 = fm.beginTransaction();
+        transaction0.replace(R.id.dish_lycontent,dishFragment);
+        transaction0.commit();
+
         return view;
     }
 
     private void show() {
         if (flag == "dish")
-        { transaction.replace(R.id.dish_lycontent,dishFragment);
-            transaction.commit();}
+        {
+            FragmentTransaction     transactionDish;
+            transactionDish = fm.beginTransaction();
+            transactionDish.replace(R.id.dish_lycontent,dishFragment);
+            transactionDish.commit();}
 
         if (flag == "service")
-            Toast.makeText(getContext(),"this is serviceFragment",Toast.LENGTH_LONG).show();
-//            transaction.replace(R.id.dish_lycontent,serviceFragment);
-//        transaction.commit();
+        {
+            FragmentTransaction     transactionDish;
+            transactionDish = fm.beginTransaction();
+            transactionDish.replace(R.id.dish_lycontent,serviceFragment);
+            transactionDish.commit();}
     }
 
     //初始化放到listView中的数据
@@ -88,6 +106,7 @@ public class RankFragment extends android.support.v4.app.Fragment implements OnC
         list.add("清真");
         list.add("红楼");
 
+//        serviceFragment = new ServiceFragment();
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(getContext(),
                 android.R.layout.simple_list_item_1, list);
         listView.setAdapter(adapter);
@@ -160,10 +179,13 @@ public class RankFragment extends android.support.v4.app.Fragment implements OnC
                 }
 
 
+                dishClickFlag = 0;
+                serviceClickFlag = 0;
                 dishFragment = new DishFragment();
-                fm = getFragmentManager();
-                transaction = fm.beginTransaction();
+                serviceFragment = new ServiceFragment();
 
+
+                show();
 
 
             }
@@ -183,6 +205,7 @@ public class RankFragment extends android.support.v4.app.Fragment implements OnC
         mWhichFloor   = (TextView) view.findViewById(R.id.which_floor);
         mDishRank     = (Button) view.findViewById(R.id.dish_rank);
         mServiceRank  = (Button) view.findViewById(R.id.service_rank);
+
 
         mFloorData = new Floor2data();
     }
@@ -229,15 +252,19 @@ public class RankFragment extends android.support.v4.app.Fragment implements OnC
 //                break;
 
             case R.id.service_rank:
-            case R.id.dish_rank:
-            case R.id.listView:
-                if (v.getId() == R.id.service_rank)
-                    flag = "service";
-                if (v.getId() == R.id.dish_rank)
-                    flag = "dish";
-                Toast.makeText(getContext(),"miao?",Toast.LENGTH_SHORT).show();
-                show();
+                flag = "service";
+                dishClickFlag = 1;
+                if (serviceClickFlag == 1)
+                    show();
                 break;
+
+            case R.id.dish_rank:
+                flag = "dish";
+                serviceClickFlag = 1;
+                if (dishClickFlag == 1)
+                    show();
+                break;
+
             default:
                 break;
         }

@@ -1,4 +1,4 @@
-package com.example.elsie.framelayout.Rank;
+package com.example.elsie.framelayout.Rank.DishRank;
 
 import java.io.Serializable;
 import java.util.List;
@@ -11,7 +11,7 @@ import java.util.List;
  * description:
  *****************************************************/
 
-public class DataResult implements Serializable {
+public class DishDataResult implements Serializable {
 
     /**
      * error : false

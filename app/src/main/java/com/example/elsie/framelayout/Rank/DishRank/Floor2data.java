@@ -1,4 +1,4 @@
-package com.example.elsie.framelayout.Rank;
+package com.example.elsie.framelayout.Rank.DishRank;
 
 /**
  * Created by Elsie on 2017/12/5.

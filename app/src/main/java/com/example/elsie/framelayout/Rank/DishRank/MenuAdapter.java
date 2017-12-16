@@ -1,4 +1,4 @@
-package com.example.elsie.framelayout.Rank;
+package com.example.elsie.framelayout.Rank.DishRank;
 
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -20,8 +20,6 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.List;
-
-import static com.example.elsie.framelayout.Rank.RankFragment.mFloorData;
 
 /**
  * Created by Elsie on 2017/12/3.
@@ -61,7 +59,7 @@ public class MenuAdapter extends RecyclerView.Adapter<MenuAdapter.ViewHolder> {
         holder.dishPrice.setText("￥"+(int) dish.getFoodPrice());
         holder.dishName.setText(dish.getFoodName());
         holder.dishCommend.setText(dish.getSalesCount()+"人推荐");
-//        holder.dishImageView.setImageResource(Integer.parseInt(dish.getImageUrl()));
+//        holder.dishImageView.setImageResource(dish.getImageUrl());
         holder.dishImageView.setImageResource(R.drawable.dish);
 
         holder.likeDish.setOnClickListener(new View.OnClickListener() {
@@ -100,32 +98,31 @@ public class MenuAdapter extends RecyclerView.Adapter<MenuAdapter.ViewHolder> {
                     isClick[0] = false;
                 }
 
-//                将数据写到json中
-                if (num != 0) {
-                    int key = dish.getID();
-                    String floor = null;
-                    switch (mFloorData.getFloor()) {
-                        case 1:
-                            floor = "一楼";
-                            break;
-                        case 2:
-                            floor = "二楼";
-                            break;
-                        case 3:
-                            floor = "三楼";
-                            break;
-                        case 4:
-                            floor = "清真";
-                            break;
-                        case 5:
-                            floor = "红楼";
-                            break;
-                        default:
-                            break;
-                    }
-
-                    writeJSON(key,num,floor);
-                }
+////                将数据写到json中
+//                if (num != 0) {
+//                    int key = dish.getID();
+//                    String floor = null;
+//                    switch (mFloorData.getFloor()) {
+//                        case 1:
+//                            floor = "一楼";
+//                            break;
+//                        case 2:
+//                            floor = "二楼";
+//                            break;
+//                        case 3:
+//                            floor = "三楼";
+//                            break;
+//                        case 4:
+//                            floor = "清真";
+//                            break;
+//                        case 5:
+//                            floor = "红楼";
+//                            break;
+//                        default:
+//                            break;
+//                    }
+//
+//                }
 
 
 
@@ -186,9 +183,9 @@ public class MenuAdapter extends RecyclerView.Adapter<MenuAdapter.ViewHolder> {
         // 读取原始json文件并进行操作和输出
         try {
             BufferedReader br = new BufferedReader(new FileReader(
-                    "src/main/res/raw/dish_json.txt"));// 读取原始json文件
+                    "src/main/res/raw/dish.json"));// 读取原始json文件
             BufferedWriter bw = new BufferedWriter(new FileWriter(
-                    "src/main/res/raw/dish_json.txt"));// 输出新的json文件
+                    "src/main/res/raw/dish.json"));// 输出新的json文件
             String s = null, ws = null;
             while ((s = br.readLine()) != null) {
                 // System.out.println(s);

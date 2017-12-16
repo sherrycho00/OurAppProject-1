@@ -1,4 +1,4 @@
-package com.example.elsie.framelayout.Rank;
+package com.example.elsie.framelayout.Rank.DishRank;
 
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -28,8 +28,8 @@ public class DishFragment extends android.support.v4.app.Fragment  {
     private RecyclerView menu;
     private MenuAdapter  dishAdapter;//适配器
     private List<Product> mProductList;
-    private List mDishList;
-    private List<Product> m1fDish;//数据源
+    private List<Product> mDishList;//分楼层
+    private List<Product> mFloorDish;//数据源
 
     private LinearLayout mRankTop;
 //    从点击事项获取楼层
@@ -43,7 +43,7 @@ public class DishFragment extends android.support.v4.app.Fragment  {
 //        获得菜品数据并建立适配器和数据的关系
         initData();
         mProductList = Parser.getCateProductList(getActivity());
-        m1fDish = new ArrayList<>();
+        mFloorDish = new ArrayList<>();
 
 //        将数据源分成一楼、二楼、……
         int temp = mFloorData.getFloor();
@@ -93,7 +93,7 @@ public class DishFragment extends android.support.v4.app.Fragment  {
             switch (floor) {
                 case 1:
                     if (dish.getType().equals("一楼")) {
-                        m1fDish.add(dish);
+                        mFloorDish.add(dish);
                     } else {
                         break;
                     }
@@ -101,7 +101,7 @@ public class DishFragment extends android.support.v4.app.Fragment  {
 
                 case 2:
                     if (dish.getType().equals("二楼")) {
-                        m1fDish.add(dish);
+                        mFloorDish.add(dish);
                     } else {
                         break;
                     }
@@ -109,7 +109,7 @@ public class DishFragment extends android.support.v4.app.Fragment  {
 
                 case 3:
                     if (dish.getType().equals("三楼")) {
-                        m1fDish.add(dish);
+                        mFloorDish.add(dish);
                     } else {
                         break;
                     }
@@ -117,7 +117,7 @@ public class DishFragment extends android.support.v4.app.Fragment  {
 
                 case 4:
                     if (dish.getType().equals("清真")) {
-                        m1fDish.add(dish);
+                        mFloorDish.add(dish);
                     } else {
                         break;
                     }
@@ -125,7 +125,7 @@ public class DishFragment extends android.support.v4.app.Fragment  {
 
                 case 5:
                     if (dish.getType().equals("红楼")) {
-                        m1fDish.add(dish);
+                        mFloorDish.add(dish);
                     } else {
                         break;
                     }
@@ -137,7 +137,7 @@ public class DishFragment extends android.support.v4.app.Fragment  {
 
         }
 
-        mDishList = m1fDish;
+        mDishList = mFloorDish;
     }
 
 
