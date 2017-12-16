@@ -4,6 +4,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
@@ -23,10 +24,15 @@ import com.example.elsie.framelayout.BaseActivity;
 import com.example.elsie.framelayout.R;
 import com.example.elsie.framelayout.Utils.ImageUtils;
 
-import org.litepal.tablemanager.Connector;
-
 import java.io.File;
+import java.util.List;
 
+import cn.bmob.v3.BmobQuery;
+import cn.bmob.v3.datatype.BmobFile;
+import cn.bmob.v3.listener.FindListener;
+import cn.bmob.v3.listener.SaveListener;
+
+import static com.example.elsie.framelayout.LoginActivity.muserid;
 import static com.example.elsie.framelayout.Setting.SettingFragment.mheader_img;
 import static com.example.elsie.framelayout.Setting.SettingFragment.mnick_name;
 
@@ -36,20 +42,26 @@ public class PersonalSettingActivity extends BaseActivity {
     protected static final int CHOOSE_PICTURE = 0;
     protected static final int TAKE_PICTURE = 1;
     private static final int CROP_SMALL_PICTURE = 2;
+    private static int username_flag=0;
+    private int userimg_flag=0;//修改头像标志位
     protected static Uri tempUri;
     public static ImageView mimage_user;
     private EditText user_name;
     private EditText user_mail;
+    public static String mn_name;
     public static Bitmap mphoto;
     public static String inputText1;
-    public static String inputText2;
+    public static BmobFile bmobFile;
+    public  String imagePath;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_personal_setting);
-        Connector.getDatabase();
+
+
+
+        /*Connector.getDatabase();*/
         user_name=(EditText)findViewById(R.id.usr_name);
-        user_mail=(EditText)findViewById(R.id.usr_mail);
         mimage_user = (ImageView) findViewById(R.id.usr_img);
 
 
@@ -57,26 +69,55 @@ public class PersonalSettingActivity extends BaseActivity {
         if(!TextUtils.isEmpty(inputText1)){
             user_name.setText(inputText1);
             user_name.setSelection(inputText1.length());
+            mn_name=user_name.getText().toString();
         }
-        if(!TextUtils.isEmpty(inputText2)){
-            user_mail.setText(inputText2);
 
-            user_mail.setSelection(inputText2.length());
-        }
+
+            mimage_user.setImageResource(R.drawable.userimg);
+
+        BmobQuery<MyUser> query=new BmobQuery<MyUser>();
+        query.addWhereEqualTo("User_name",muserid);
+        query.findObjects(this, new FindListener<MyUser>() {
+            @Override
+            public void onSuccess(List<MyUser> list) {
+                for(MyUser myUser:list){
+                    if(myUser.getHead_url()!=null){
+                        Bitmap bitmap = BitmapFactory.decodeFile(myUser.getHead_url());
+                        mimage_user.setImageBitmap(bitmap);}
+                }
+            }
+
+            @Override
+            public void onError(int i, String s) {
+            }
+        });
+
         save.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 inputText1=user_name.getText().toString();
-                inputText2=user_mail.getText().toString();
-                PersonalModel Student=new PersonalModel();
-                Student.setName(inputText1);
-                Student.setMail(inputText2);
-                Student.setPhoto(mphoto);
-                mnick_name.setText(Student.getName());
-                user_name.setText(Student.getName());
-                user_mail.setText(Student.getMail());
+                MyUser Student=new MyUser();
+                Student.setUser_name(muserid);
+                Student.setNickname(inputText1);
+                Student.setHead_url(imagePath);
+                Student.save(PersonalSettingActivity.this, new SaveListener() {
+                    @Override
+                    public void onSuccess() {
+                        Toast.makeText(PersonalSettingActivity.this,"保存成功",Toast.LENGTH_SHORT).show();
+                    }
+
+                    @Override
+                    public void onFailure(int i, String s) {
+                        Toast.makeText(PersonalSettingActivity.this,"保存失败",Toast.LENGTH_SHORT).show();
+                    }
+                });
+
+                mnick_name.setText(Student.getNickname());
+                user_name.setText(Student.getNickname());
                 //mimage_user.setImageBitmap(Student.getPhoto());
+                username_flag=1;
                 Toast.makeText(PersonalSettingActivity.this,"保存成功",Toast.LENGTH_SHORT).show();
+                PersonalSettingActivity.this.finish();
             }
         });
         Button btn_change = (Button) findViewById(R.id.btn_change);
@@ -111,7 +152,6 @@ public class PersonalSettingActivity extends BaseActivity {
     protected void onDestroy(){
         super.onDestroy();
         String inputText1=user_name.getText().toString();
-        String inputText2=user_mail.getText().toString();
     }
 
     /**
@@ -205,7 +245,7 @@ public class PersonalSettingActivity extends BaseActivity {
             mphoto = ImageUtils.toRoundBitmap(mphoto); // 处理后的图片
             mimage_user.setImageBitmap(mphoto);
             mheader_img.setImageBitmap(mphoto);
-
+            userimg_flag=1;
             uploadPic(mphoto);
         }
     }
@@ -213,10 +253,11 @@ public class PersonalSettingActivity extends BaseActivity {
     private void uploadPic(Bitmap bitmap) {
         // 上传至服务器
         // 把Bitmap转换成file，然后得到file的url，做文件上传操作
-        String imagePath = ImageUtils.savePhoto(bitmap, Environment
+        imagePath = ImageUtils.savePhoto(bitmap, Environment
                 .getExternalStorageDirectory().getAbsolutePath(), String
                 .valueOf(System.currentTimeMillis()));
         Log.e("imagePath", imagePath+"");
+
         if(imagePath != null){
             Log.d(TAG,"imagePath:"+imagePath);
         }

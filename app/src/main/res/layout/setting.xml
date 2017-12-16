@@ -5,10 +5,12 @@
 
     <!--显示个人资料栏的布局-->
     <RelativeLayout
+        android:id="@+id/profile"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/bcg_shape"
-        android:gravity="center_vertical">
+        android:gravity="center_vertical"
+        android:layout_marginTop="20dp">
 
         <ImageView
             android:id="@+id/image_user"
@@ -30,16 +32,30 @@
     </RelativeLayout>
 
     <!--六个选项的button-->
+
+    <Button
+        android:id="@+id/usr_setting"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:paddingLeft="15dp"
+        android:gravity="center_vertical"
+        android:drawablePadding="10dip"
+        android:drawableLeft="@drawable/setting"
+        android:text="账号设置"
+        android:textSize="16dp"
+        android:background="@drawable/bcg_shape"/>
+
     <Button
         android:id="@+id/favorites"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="15dp"
+        android:layout_marginTop="20dp"
         android:paddingLeft="15dp"
         android:gravity="center_vertical"
-        android:drawablePadding="10dip"
-        android:drawableLeft="@drawable/favorites"
-        android:text="收藏"
+        android:drawablePadding="10dp"
+        android:drawableLeft="@drawable/favorite"
+        android:text="我的收藏"
         android:textSize="16dp"
         android:background="@drawable/bcg_shape"/>
 
@@ -51,24 +67,7 @@
         android:layout_marginLeft="15dp"
         android:layout_marginRight="15dp" />
 
-    <Button
-        android:id="@+id/usr_setting"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:paddingLeft="15dp"
-        android:gravity="center_vertical"
-        android:drawablePadding="10dip"
-        android:drawableLeft="@drawable/setting"
-        android:text="账号设置"
-        android:textSize="16dp"
-        android:background="@drawable/bcg_shape"/>
 
-    <View
-        android:layout_width="fill_parent"
-        android:layout_height="1dp"
-        android:background="#90909090"
-        android:layout_marginLeft="15dp"
-        android:layout_marginRight="15dp" />
 
     <Button
         android:id="@+id/share"
@@ -82,25 +81,6 @@
         android:textSize="16dp"
         android:background="@drawable/bcg_shape"/>
 
-
-    <View
-        android:layout_width="fill_parent"
-        android:layout_height="1dp"
-        android:background="#90909090"
-        android:layout_marginLeft="15dp"
-        android:layout_marginRight="15dp" />
-
-    <Button
-        android:id="@+id/exit"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:paddingLeft="15dp"
-        android:gravity="center_vertical"
-        android:drawablePadding="10dp"
-        android:drawableLeft="@drawable/pay"
-        android:text="饭卡充值"
-        android:textSize="16dp"
-        android:background="@drawable/bcg_shape"/>
 
     <View
         android:layout_width="fill_parent"
@@ -140,5 +120,19 @@
         android:textSize="16dp"
         android:background="@drawable/bcg_shape"/>
 
+
+
+    <Button
+        android:id="@+id/exit"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:paddingLeft="15dp"
+        android:gravity="center_vertical"
+        android:drawablePadding="10dp"
+        android:drawableLeft="@drawable/money"
+        android:text="饭卡充值"
+        android:textSize="16dp"
+        android:background="@drawable/bcg_shape"/>
 
 </LinearLayout>
