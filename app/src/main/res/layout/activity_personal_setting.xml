@@ -5,10 +5,10 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    tools:context="com.example.elsie.framelayout.Setting.PersonalSettingActivity">
+    tools:context="com.example.elsie.framelayout.PersonalSettingActivity">
     <include layout="@layout/profile_top"></include>
     <com.makeramen.roundedimageview.RoundedImageView
-        android:id="@+id/image_user"
+        android:id="@+id/usr_img"
         android:layout_width="100dp"
         android:layout_height="100dp"
         android:layout_alignParentTop="true"
@@ -52,24 +52,8 @@
         android:textSize="16dp"
         android:background="@drawable/bcg_shape"/>
 
-    <View
-        android:layout_width="fill_parent"
-        android:layout_height="1dp"
-        android:background="#90909090"
-        android:layout_marginLeft="15dp"
-        android:layout_marginRight="15dp" />
 
-    <EditText android:id="@+id/usr_mail"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:paddingLeft="15dp"
-        android:paddingTop="15dp"
-        android:paddingBottom="10dp"
-        android:gravity="center_vertical"
-        android:drawablePadding="10dp"
-        android:hint="请输入邮箱"
-        android:textSize="16dp"
-        android:background="@drawable/bcg_shape"/>
+
 
     <Button
         android:id="@+id/exit"
