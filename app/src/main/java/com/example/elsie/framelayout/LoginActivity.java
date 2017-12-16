@@ -16,8 +16,11 @@ import android.widget.Toast;
 import com.bumptech.glide.Glide;
 import com.facebook.drawee.backends.pipeline.Fresco;
 
+import cn.bmob.v3.Bmob;
+
 public class LoginActivity extends FragmentActivity {
 
+    public static String muserid;//获取用户名
     private MySqliteHelper helper;
     Button sign;
     Button reg;
@@ -28,11 +31,18 @@ public class LoginActivity extends FragmentActivity {
     private EditText pwd;
     int userflag ;//定义一个标示判断 用户名是否存在
     int loginflag ;//登录时判断用户密码是否输入正确
+
+    //云数据库应用ID
+    public static String APPID = "0f93e5a6104d9b326d354d3b2479ff2e";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Fresco.initialize(this);
         setContentView(R.layout.activity_login);
+
+        //启动云数据库
+        Bmob.initialize(this, APPID);
 
         //用户已存在，直接登录
 
@@ -41,6 +51,7 @@ public class LoginActivity extends FragmentActivity {
         SharedPreferences pref =getSharedPreferences("data",MODE_PRIVATE);
         String name=pref.getString("username","");
         String password=pref.getString("password","");
+        muserid=name;
         if(!TextUtils.isEmpty(name)) {
             user.setText(name);
             user.setSelection(name.length());
@@ -66,7 +77,7 @@ public class LoginActivity extends FragmentActivity {
             @Override
             public void onClick(View v) {
                 select();
-
+                muserid=user.getText().toString();
             }
 
         });
@@ -187,7 +198,5 @@ public class LoginActivity extends FragmentActivity {
         db.close();
         //Toast.makeText(this, "已经关闭数据库", Toast.LENGTH_SHORT).show();
     }
-
-
 
 }

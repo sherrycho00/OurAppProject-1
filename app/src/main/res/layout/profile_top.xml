@@ -12,13 +12,13 @@
         android:layout_height="wrap_content"
         android:src="@drawable/back"
         android:layout_marginTop="10dp"
-        android:layout_marginLeft="20dp"/>
+        android:layout_marginLeft="10dp"/>
     <TextView
         android:id="@+id/str_back"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_toRightOf="@+id/back"
-        android:layout_marginLeft="5dp"
+        android:layout_marginLeft="15dp"
         android:text="个人设置"
         android:layout_marginTop="10dp"
         android:textColor="#ffffff"

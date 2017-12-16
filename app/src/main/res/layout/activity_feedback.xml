@@ -1,25 +1,47 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent">
 
     <include layout="@layout/feedback_top"></include>
 
-    <TextView android:id="@+id/fb_str"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="150dp"
-        android:layout_marginLeft="60dp"
-        android:layout_marginRight="60dp"
-        android:text="如果您在使用过程中遇到问题可以发送邮件至下面的邮箱告知我们，我们会尽快解决的，感谢您的反馈～"
-        android:textSize="15sp"/>
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/fb_str"
-        android:layout_marginTop="10dp"
-        android:layout_marginLeft="60dp"
-        android:layout_marginRight="60dp"
-        android:textColor="#6ea0f8"
-        android:text="邮箱地址：fanfou@gmail.com"/>
-</RelativeLayout>
+    <LinearLayout android:orientation="vertical"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp">
+        <TextView android:id="@+id/feedback_title"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:textSize="16sp"
+            android:textColor="#706F6D"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:text="欢迎您提出宝贵的意见和建议，您的建议对我们改善服务非常有帮助。">
+        </TextView>
+        <RelativeLayout android:layout_width="fill_parent"
+            android:layout_height="fill_parent">
+            <EditText android:id="@+id/advice"
+                android:background="@drawable/bcg_shape"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:maxEms="10"
+                android:minEms="10"
+                android:hint="请输入您的反馈意见"
+                android:gravity="top"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="50dp"/>
+            <Button android:id="@+id/fb_msg"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:text="提交反馈"
+                android:textSize="16sp"
+                android:background="#6ea0fb"
+                android:layout_gravity="center_horizontal"
+                android:layout_alignParentBottom="true"
+                android:layout_marginBottom="10dp"/>
+        </RelativeLayout>
+    </LinearLayout>
+</LinearLayout>

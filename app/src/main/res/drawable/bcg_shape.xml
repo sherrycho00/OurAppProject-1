@@ -16,11 +16,11 @@
     <solid android:color="#ffffff" />
 
     <!--设置描边-->
-    <stroke android:width="1dip"
+    <!--<stroke android:width="1dip"
         android:color="#ffffff"
         android:dashWidth="3dp"
         android:dashGap="0dp" />
-
+-->
     <!--设置圆角-->
     <!--corners android:radius="8dp" />-->
 </shape>
