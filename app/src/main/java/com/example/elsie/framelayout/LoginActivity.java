@@ -144,8 +144,6 @@ public class LoginActivity extends FragmentActivity {
 
 
 
-
-
     }
 
 
@@ -172,7 +170,7 @@ public class LoginActivity extends FragmentActivity {
 
                 //intent bundle传值
                 Intent MainActivity = new Intent();
-                MainActivity .setClass(LoginActivity.this,MainActivity.class);
+                MainActivity.setClass(LoginActivity.this,MainActivity.class);
                 Bundle bundle = new Bundle(); //该类用作携带数据
                 bundle.putString("user", user.getText().toString());
                 MainActivity.putExtras(bundle);   //向MainActivity传值

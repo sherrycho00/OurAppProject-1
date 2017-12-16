@@ -1,4 +1,4 @@
-package com.example.elsie.framelayout.Rank;
+package com.example.elsie.framelayout.Rank.DishRank;
 
 import java.io.Serializable;
 import java.util.List;
@@ -11,23 +11,16 @@ import java.util.List;
  * description:
  *****************************************************/
 
-public class DataResult implements Serializable {
+public class DishDataResult implements Serializable {
 
     /**
      * error : false
      * results : [{"_id":1,"title":"今日特价","foodList":[{"ID":101,"foodName":"巧克力","foodPrice":22.5,"salesCount":101,"imageUrl":"1"},{"ID":101,"foodName":"巧克力","foodPrice":22.5,"salesCount":101,"imageUrl":"1"},{"ID":101,"foodName":"巧克力","foodPrice":22.5,"salesCount":101,"imageUrl":"1"},{"ID":101,"foodName":"巧克力","foodPrice":22.5,"salesCount":101,"imageUrl":"1"},{"ID":101,"foodName":"巧克力","foodPrice":22.5,"salesCount":101,"imageUrl":"1"},{"ID":101,"foodName":"巧克力","foodPrice":22.5,"salesCount":101,"imageUrl":"1"},{"ID":101,"foodName":"巧克力","foodPrice":22.5,"salesCount":101,"imageUrl":"1"}],"type":"Android","desc":""},{"_id":2,"title":"新品推荐","foodList":[{"ID":101,"foodName":"小鲜肉","foodPrice":101,"salesCount":101,"imageUrl":101},{"ID":101,"foodName":"小鲜肉","foodPrice":101,"salesCount":101,"imageUrl":101},{"ID":101,"foodName":"小鲜肉","foodPrice":101,"salesCount":101,"imageUrl":101},{"ID":101,"foodName":"小鲜肉","foodPrice":101,"salesCount":101,"imageUrl":101},{"ID":101,"foodName":"小鲜肉","foodPrice":101,"salesCount":101,"imageUrl":101}],"type":"Android","desc":""},{"_id":3,"title":"精选水果","foodList":[{"ID":101,"foodName":"海南香蕉","foodPrice":101,"salesCount":101,"imageUrl":101},{"ID":101,"foodName":"海南香蕉","foodPrice":101,"salesCount":101,"imageUrl":101},{"ID":101,"foodName":"海南香蕉","foodPrice":101,"salesCount":101,"imageUrl":101},{"ID":101,"foodName":"海南香蕉","foodPrice":101,"salesCount":101,"imageUrl":101},{"ID":101,"foodName":"海南香蕉","foodPrice":101,"salesCount":101,"imageUrl":101},{"ID":101,"foodName":"海南香蕉","foodPrice":101,"salesCount":101,"imageUrl":101}],"type":"Android","desc":""},{"_id":4,"title":"鲜切果盘","foodList":[{"ID":"sdfasdfasdf","foodName":101,"foodPrice":101,"salesCount":101,"imageUrl":101},{"ID":"sdfasdfasdf","foodName":101,"foodPrice":101,"salesCount":101,"imageUrl":101},{"ID":"sdfasdfasdf","foodName":101,"foodPrice":101,"salesCount":101,"imageUrl":101},{"ID":"sdfasdfasdf","foodName":101,"foodPrice":101,"salesCount":101,"imageUrl":101}],"type":"Android","desc":""},{"_id":5,"title":"精品干过","foodList":[{"ID":101,"foodName":"金钩大蜜女","foodPrice":101,"salesCount":101,"imageUrl":101},{"ID":101,"foodName":"金钩大蜜女","foodPrice":101,"salesCount":101,"imageUrl":101},{"ID":101,"foodName":"金钩大蜜女","foodPrice":101,"salesCount":101,"imageUrl":101},{"ID":101,"foodName":"金钩大蜜女","foodPrice":101,"salesCount":101,"imageUrl":101},{"ID":101,"foodName":"金钩大蜜女","foodPrice":101,"salesCount":101,"imageUrl":101},{"ID":101,"foodName":"金钩大蜜女","foodPrice":101,"salesCount":101,"imageUrl":101}],"type":"Android","desc":""},{"_id":6,"title":"精品零食","foodList":[{"ID":101,"foodName":"三只老鼠","foodPrice":101,"salesCount":101,"imageUrl":101},{"ID":101,"foodName":"三只老鼠","foodPrice":101,"salesCount":101,"imageUrl":101},{"ID":101,"foodName":"三只老鼠","foodPrice":101,"salesCount":101,"imageUrl":101},{"ID":101,"foodName":"三只老鼠","foodPrice":101,"salesCount":101,"imageUrl":101}],"type":"Android","desc":""},{"_id":7,"title":"礼品专区","foodList":[{"ID":101,"foodName":"进店1则","foodPrice":101,"salesCount":101,"imageUrl":101},{"ID":101,"foodName":"进店1则","foodPrice":101,"salesCount":101,"imageUrl":101},{"ID":101,"foodName":"进店1则","foodPrice":101,"salesCount":101,"imageUrl":101},{"ID":101,"foodName":"进店1则","foodPrice":101,"salesCount":101,"imageUrl":101},{"ID":101,"foodName":"进店1则","foodPrice":101,"salesCount":101,"imageUrl":101}],"type":"Android","desc":""}]
      */
 
-    private boolean error;
+
     private List<ResultsBean> results;
 
-    public boolean isError() {
-        return error;
-    }
-
-    public void setError(boolean error) {
-        this.error = error;
-    }
 
     public List<ResultsBean> getResults() {
         return results;

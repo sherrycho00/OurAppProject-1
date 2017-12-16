@@ -1,4 +1,4 @@
-package com.example.elsie.framelayout.Rank;
+package com.example.elsie.framelayout.Rank.DishRank;
 
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -10,6 +10,15 @@ import android.widget.Toast;
 
 import com.example.elsie.framelayout.R;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.List;
 
 /**
@@ -50,7 +59,7 @@ public class MenuAdapter extends RecyclerView.Adapter<MenuAdapter.ViewHolder> {
         holder.dishPrice.setText("￥"+(int) dish.getFoodPrice());
         holder.dishName.setText(dish.getFoodName());
         holder.dishCommend.setText(dish.getSalesCount()+"人推荐");
-//        holder.dishImageView.setImageResource(Integer.parseInt(dish.getImageUrl()));
+//        holder.dishImageView.setImageResource(dish.getImageUrl());
         holder.dishImageView.setImageResource(R.drawable.dish);
 
         holder.likeDish.setOnClickListener(new View.OnClickListener() {
@@ -58,10 +67,11 @@ public class MenuAdapter extends RecyclerView.Adapter<MenuAdapter.ViewHolder> {
             public void onClick(View v) {
 
                 int flag = 0;
+                int num = 0;
 //                实现只能点击一次
 //                点击赞
                 if (!isClick[0]) {
-                    int num = 0;
+
                     num = dish.getSalesCount();
                     num ++;
                     dish.setSalesCount(num);
@@ -77,17 +87,42 @@ public class MenuAdapter extends RecyclerView.Adapter<MenuAdapter.ViewHolder> {
 
 //                取消赞
                 if (isClick[0] && flag == 0) {
-                    int num = 0;
                     num = dish.getSalesCount();
                     num --;
                     dish.setSalesCount(num);
                     holder.dishCommend.setText(dish.getSalesCount()+"人推荐");
                     Toast.makeText(v.getContext(),"cancle click like",Toast.LENGTH_LONG).show();
 //                换图片
-                    holder.likeDish.setImageResource(R.drawable.dish_like);
+                    holder.likeDish.setImageResource(R.drawable.thumb_up);
 
                     isClick[0] = false;
                 }
+
+////                将数据写到json中
+//                if (num != 0) {
+//                    int key = dish.getID();
+//                    String floor = null;
+//                    switch (mFloorData.getFloor()) {
+//                        case 1:
+//                            floor = "一楼";
+//                            break;
+//                        case 2:
+//                            floor = "二楼";
+//                            break;
+//                        case 3:
+//                            floor = "三楼";
+//                            break;
+//                        case 4:
+//                            floor = "清真";
+//                            break;
+//                        case 5:
+//                            floor = "红楼";
+//                            break;
+//                        default:
+//                            break;
+//                    }
+//
+//                }
 
 
 
@@ -97,9 +132,20 @@ public class MenuAdapter extends RecyclerView.Adapter<MenuAdapter.ViewHolder> {
 //            点击了赞就要先点击取消赞然后才能点击贬
             @Override
             public void onClick(View v) {
+
+                int flag = 0;
+//                点击不赞
                 if (!isClick[0] && !isClick[1]) {
                     Toast.makeText(v.getContext(),"click dislike",Toast.LENGTH_LONG).show();
                     isClick[1] = true;
+                    flag = 1;
+                    holder.dislikeDish.setImageResource(R.drawable.dish_dislike_filling);
+                }
+//                取消不赞
+                if (!isClick[0] && isClick[1] && flag==0) {
+                    holder.dislikeDish.setImageResource(R.drawable.dish_dislike);
+                    isClick[1] = false;
+
                 }
             }
         });
@@ -131,4 +177,55 @@ public class MenuAdapter extends RecyclerView.Adapter<MenuAdapter.ViewHolder> {
 
         }
     }
+
+    public void writeJSON(int key,int value,String floor) {
+
+        // 读取原始json文件并进行操作和输出
+        try {
+            BufferedReader br = new BufferedReader(new FileReader(
+                    "src/main/res/raw/dish.json"));// 读取原始json文件
+            BufferedWriter bw = new BufferedWriter(new FileWriter(
+                    "src/main/res/raw/dish.json"));// 输出新的json文件
+            String s = null, ws = null;
+            while ((s = br.readLine()) != null) {
+                // System.out.println(s);
+                try {
+                    JSONObject dataJson = new JSONObject(s);// 创建一个包含原始json串的json对象
+//                    确定获得对应楼层的菜单
+                    if (dataJson.get("title") == floor) {
+                        JSONArray foodList = dataJson.getJSONArray("foodList");// 找到foodList的json数组
+                        for (int i = 0; i < foodList.length(); i++) {
+                            JSONObject dish = foodList.getJSONObject(i);// 获取foodList数组的第i个json对象
+                            if (dish.getInt("ID") == key) {
+                                dish.put("salesCount",value);
+                                break;
+                            }
+                        }
+                        ws = dataJson.toString();
+                        break;
+                    }
+
+                } catch (JSONException e) {
+                    // TODO Auto-generated catch block
+                    e.printStackTrace();
+                }
+            }
+
+            bw.write(ws);
+            // bw.newLine();
+
+            bw.flush();
+            br.close();
+            bw.close();
+
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+
+    }
+
 }
+
+
+

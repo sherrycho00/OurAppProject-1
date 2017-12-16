@@ -39,7 +39,6 @@ dependencies {
     compile 'cn.bmob.android:bmob-push:0.8'
     compile 'com.makeramen:roundedimageview:2.3.0'
     compile 'com.android.support:appcompat-v7:26.+'
-    compile 'com.android.support.constraint:constraint-layout:1.0.2'
     compile 'com.facebook.fresco:fresco:1.5.0'
     compile 'com.android.support:design:26.0.0-alpha1'
     compile 'com.android.support:percent:26.0.0-alpha1'
@@ -49,4 +48,7 @@ dependencies {
     compile 'com.android.support:recyclerview-v7:26.0.0-alpha1'
     testCompile 'junit:junit:4.12'
     annotationProcessor 'com.github.bumptech.glide:compiler:4.3.1'
+
+    compile 'com.coldmoqiuli:banners:1.0.0'
+
 }
